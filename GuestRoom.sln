@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{93D183D2-3FF5-425A-A923-51C8B335879A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{65E0D1B6-5701-4F2F-83DE-2B0E50FF35E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuestRoom.Api", "src\GuestRoom.Api\GuestRoom.Api.csproj", "{4DB59ED7-0E4B-4747-8930-4D76AF996486}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486}.Debug|x64.Build.0 = Debug|Any CPU
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486}.Debug|x86.Build.0 = Debug|Any CPU
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486}.Release|x64.ActiveCfg = Release|Any CPU
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486}.Release|x64.Build.0 = Release|Any CPU
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486}.Release|x86.ActiveCfg = Release|Any CPU
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4DB59ED7-0E4B-4747-8930-4D76AF996486} = {93D183D2-3FF5-425A-A923-51C8B335879A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D115EB8-CEB5-43E6-BEA3-CD40760CFD67}
+	EndGlobalSection
+EndGlobal
