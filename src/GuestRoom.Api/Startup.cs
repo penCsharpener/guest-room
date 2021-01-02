@@ -22,6 +22,7 @@ namespace GuestRoom.Api
         {
             services.AddControllers();
             services.AddEfCore(Configuration);
+            services.AddGuestRoomServices(Configuration);
             services.AddMediatR(GetType().Assembly);
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "GuestRoom.Api", Version = "v1" }); });
         }
