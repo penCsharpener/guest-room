@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using GuestRoom.Api.Contracts.Security;
+using GuestRoom.Api.Extensions;
 using GuestRoom.Api.Models;
 using GuestRoom.Api.Models.Account;
 using GuestRoom.Domain.Models;
@@ -31,6 +32,8 @@ namespace GuestRoom.Api.Controllers
 
             if (user == null)
             {
+                _logger.LogInformation($"Failed login attempt by user {loginDto.Email.ToEmailForLogging()}");
+
                 return Unauthorized(new ApiResponse(HttpStatusCode.Unauthorized));
             }
 
@@ -55,6 +58,8 @@ namespace GuestRoom.Api.Controllers
             {
                 return BadRequest(new ApiResponse(HttpStatusCode.BadRequest));
             }
+
+            _logger.LogInformation($"New user '{registerDto.Email.ToEmailForLogging()}' was registered.");
 
             return new UserDto { DisplayName = user.DisplayName, Token = _tokenService.CreateToken(user), Email = user.Email };
         }
