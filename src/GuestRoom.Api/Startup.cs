@@ -1,3 +1,4 @@
+using GuestRoom.Api.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,6 +21,7 @@ namespace GuestRoom.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddEfCore(Configuration);
             services.AddMediatR(GetType().Assembly);
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "GuestRoom.Api", Version = "v1" }); });
         }
