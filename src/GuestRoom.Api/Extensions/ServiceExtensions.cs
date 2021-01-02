@@ -1,5 +1,6 @@
 ﻿using System;
 using GuestRoom.Api.Contracts.Security;
+using GuestRoom.Api.Models.Configuration;
 using GuestRoom.Api.Services.Security;
 using GuestRoom.Domain;
 using GuestRoom.Domain.Models;
@@ -25,6 +26,7 @@ namespace GuestRoom.Api.Extensions
 
         internal static void AddGuestRoomServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.Configure<Token>(configuration.GetSection(nameof(Token)));
             services.AddScoped<IAuthService, AuthService>();
         }
 
