@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuestRoom.Api", "src\GuestR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuestRoom.Domain", "src\GuestRoom.Domain\GuestRoom.Domain.csproj", "{C61CE8A1-58FC-4025-B404-4516C9A36CD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuestRoom.Api.Tests", "tests\GuestRoom.Api.Tests\GuestRoom.Api.Tests.csproj", "{2D9D3EE6-EA76-4394-A261-8B0C550AF211}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuestRoom.Api.Tests", "tests\GuestRoom.Api.Tests\GuestRoom.Api.Tests.csproj", "{2D9D3EE6-EA76-4394-A261-8B0C550AF211}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FA21826D-2574-41F1-93B0-408374F1F7BC}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

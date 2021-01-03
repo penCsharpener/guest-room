@@ -6,12 +6,12 @@ namespace GuestRoom.Api.Extensions
     {
         public static bool IsNullOrEmpty(this string text)
         {
-            return string.IsNullOrEmpty(text);
+            return string.IsNullOrWhiteSpace(text);
         }
 
         public static bool IsNotNullOrEmpty(this string text)
         {
-            return !string.IsNullOrEmpty(text);
+            return !string.IsNullOrWhiteSpace(text);
         }
 
         public static string ToEmailForLogging(this string email)

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using GuestRoom.Api.Contracts.Security;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GuestRoom.Api.Services.Security
 {
+    [ExcludeFromCodeCoverage]
     public class UserManager : IUserManager
     {
         private readonly UserManager<AppUser> _userManager;
@@ -27,11 +29,36 @@ namespace GuestRoom.Api.Services.Security
             return _userManager.FindByEmailAsync(email);
         }
 
+        public Task<AppUser> FindByIdAsync(int userId)
+        {
+            return _userManager.FindByIdAsync(userId.ToString());
+        }
+
+        public Task<IdentityResult> ConfirmEmailAsync(AppUser user, string code)
+        {
+            return _userManager.ConfirmEmailAsync(user, code);
+        }
+
         public Task<AppUser> FindByUserByClaimsPrincipleWithAddressAsync(ClaimsPrincipal userClaimsPrincipal)
         {
             var email = userClaimsPrincipal?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value;
 
             return _userManager.Users.SingleOrDefaultAsync(x => x.Email.Equals(email));
+        }
+
+        public Task<string> GenerateEmailConfirmationTokenAsync(AppUser user)
+        {
+            return _userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
+
+        public Task<string> GenerateChangeEmailTokenAsync(AppUser user, string newEmail)
+        {
+            return _userManager.GenerateChangeEmailTokenAsync(user, newEmail);
+        }
+
+        public Task<string> GeneratePasswordResetTokenAsync(AppUser user)
+        {
+            return _userManager.GeneratePasswordResetTokenAsync(user);
         }
 
         public Task<AppUser> FindByEmailFromClaimsPrinciple(ClaimsPrincipal user)

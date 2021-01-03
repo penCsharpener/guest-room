@@ -1,26 +1,62 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Net;
+using System.Threading.Tasks;
 using GuestRoom.Api.Contracts.Security;
 using GuestRoom.Domain.Models;
 using Microsoft.Extensions.Logging;
+using NETCore.MailKit.Core;
 
 namespace GuestRoom.Api.Services.Security
 {
     public class AuthService : IAuthService
     {
-        private readonly ILogger<AuthService> _authService;
+        private readonly IEmailService _emailService;
+        private readonly ILogger<AuthService> _logger;
         private readonly ISignInManager _signInManager;
         private readonly IUserManager _userManager;
 
-        public AuthService(IUserManager userManager, ISignInManager signInManager, ILogger<AuthService> authService)
+        public AuthService(IUserManager userManager, ISignInManager signInManager, IEmailService emailService, ILogger<AuthService> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _authService = authService;
+            _emailService = emailService;
+            _logger = logger;
         }
 
-        public async Task<bool> RegisterAsync(AppUser user, string userPassword)
+        public event EventHandler<RegistrationConfirmationEventArgs> OnConfirmationLinkCreated;
+
+        public async Task<bool> RegisterAsync(AppUser user, RegistrationMetaData registrationMeta)
         {
-            var result = await _userManager.CreateAsync(user, userPassword);
+            var result = await _userManager.CreateAsync(user, registrationMeta.Password);
+
+            if (!result.Succeeded)
+            {
+                return false;
+            }
+
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+            OnConfirmationLinkCreated?.Invoke(this, new RegistrationConfirmationEventArgs(user.Id, code));
+
+            code = WebUtility.UrlEncode(code);
+
+            var link = $"{registrationMeta.RequestScheme}://{registrationMeta.RequestHostUrl}/{registrationMeta.ControllerName}/{registrationMeta.MethodName}?userId={user.Id}&code={code}";
+
+            await _emailService.SendAsync(user.Email, "Verify Email", $"<a href=\"{link}\">Verify Email</a>");
+
+            return true;
+        }
+
+        public async Task<bool> ConfirmEmailAsync(int userId, string code)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, code);
 
             return result.Succeeded;
         }

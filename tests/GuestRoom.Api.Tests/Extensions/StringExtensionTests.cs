@@ -19,5 +19,16 @@ namespace GuestRoom.Api.Tests.Extensions
 
             result.Should().Be(expectedOutput);
         }
+
+        [Theory]
+        [InlineData("text", true)]
+        [InlineData("  ", false)]
+        [InlineData("", false)]
+        [InlineData(default(string), false)]
+        public void String_Is_Not_Null(string text, bool expectedResult)
+        {
+            text.IsNotNullOrEmpty().Should().Be(expectedResult);
+            text.IsNullOrEmpty().Should().Be(!expectedResult);
+        }
     }
 }

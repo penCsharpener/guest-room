@@ -52,7 +52,8 @@ namespace GuestRoom.Api.Controllers
 
             var user = new AppUser { DisplayName = registerDto.DisplayName, Email = registerDto.Email, UserName = registerDto.Email };
 
-            var result = await _authService.RegisterAsync(user, registerDto.Password);
+            var meta = new RegistrationMetaData { Password = registerDto.Password, RequestScheme = Request?.Scheme, RequestHostUrl = Request?.Host.ToString() };
+            var result = await _authService.RegisterAsync(user, meta);
 
             if (!result)
             {
@@ -62,6 +63,19 @@ namespace GuestRoom.Api.Controllers
             _logger.LogInformation($"New user '{registerDto.Email.ToEmailForLogging()}' was registered.");
 
             return new UserDto { DisplayName = user.DisplayName, Token = _tokenService.CreateToken(user), Email = user.Email };
+        }
+
+        [HttpGet("verifyemail")]
+        public async Task<ActionResult> VerifyEmail(int userId, string code)
+        {
+            var result = await _authService.ConfirmEmailAsync(userId, code);
+
+            if (!result)
+            {
+                return new BadRequestObjectResult(new ApiResponse(HttpStatusCode.BadRequest));
+            }
+
+            return Ok();
         }
     }
 }

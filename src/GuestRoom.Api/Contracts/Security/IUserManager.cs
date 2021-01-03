@@ -9,7 +9,13 @@ namespace GuestRoom.Api.Contracts.Security
     {
         Task<IdentityResult> CreateAsync(AppUser user, string password);
         Task<AppUser> FindByEmailAsync(string email);
+        Task<AppUser> FindByIdAsync(int userId);
+        Task<AppUser> FindByEmailFromClaimsPrinciple(ClaimsPrincipal user);
         Task<AppUser> FindByUserByClaimsPrincipleWithAddressAsync(ClaimsPrincipal userClaimsPrincipal);
+        Task<string> GenerateChangeEmailTokenAsync(AppUser user, string newEmail);
+        Task<string> GenerateEmailConfirmationTokenAsync(AppUser user);
+        Task<string> GeneratePasswordResetTokenAsync(AppUser user);
         Task<IdentityResult> UpdateAsync(AppUser user);
+        Task<IdentityResult> ConfirmEmailAsync(AppUser user, string code);
     }
 }

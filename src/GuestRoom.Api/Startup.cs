@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using GuestRoom.Api.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +10,7 @@ using Microsoft.OpenApi.Models;
 
 namespace GuestRoom.Api
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)

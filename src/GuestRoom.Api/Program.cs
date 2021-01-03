@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using GuestRoom.Api.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -5,6 +6,7 @@ using Serilog;
 
 namespace GuestRoom.Api
 {
+    [ExcludeFromCodeCoverage]
     public class Program
     {
         public static void Main(string[] args)

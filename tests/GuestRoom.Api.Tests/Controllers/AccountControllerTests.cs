@@ -29,7 +29,7 @@ namespace GuestRoom.Api.Tests.Controllers
         public async Task User_Is_Registered()
         {
             _authService.UserIsRegisteredAsync(Arg.Any<string>()).Returns(false);
-            _authService.RegisterAsync(Arg.Any<AppUser>(), Arg.Any<string>()).Returns(true);
+            _authService.RegisterAsync(Arg.Any<AppUser>(), Arg.Any<RegistrationMetaData>()).Returns(true);
             _testObject = new AccountController(_authService, _tokenService, _logger);
 
             var result = await _testObject.Register(new RegisterDto { DisplayName = "John Doe", Email = "j.doe@email.com", Password = "pwd123" });
@@ -57,7 +57,7 @@ namespace GuestRoom.Api.Tests.Controllers
         public async Task User_Cannot_Be_Created()
         {
             _authService.UserIsRegisteredAsync(Arg.Any<string>()).Returns(false);
-            _authService.RegisterAsync(Arg.Any<AppUser>(), Arg.Any<string>()).Returns(false);
+            _authService.RegisterAsync(Arg.Any<AppUser>(), Arg.Any<RegistrationMetaData>()).Returns(false);
             _testObject = new AccountController(_authService, _tokenService, _logger);
 
             var result = await _testObject.Register(new RegisterDto { DisplayName = "John Doe", Email = "j.doe@email.com", Password = "pwd123" });
@@ -92,6 +92,30 @@ namespace GuestRoom.Api.Tests.Controllers
 
             result.Value.DisplayName.Should().Be("John Doe");
             result.Result.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task User_Email_Is_Verified()
+        {
+            _authService.ConfirmEmailAsync(Arg.Any<int>(), Arg.Any<string>()).Returns(true);
+            _testObject = new AccountController(_authService, _tokenService, _logger);
+
+            var result = await _testObject.VerifyEmail(2, "code");
+
+            result.Should().BeOfType<OkResult>();
+        }
+
+        [Fact]
+        public async Task User_Email_Is_Not_Verified()
+        {
+            _authService.ConfirmEmailAsync(Arg.Any<int>(), Arg.Any<string>()).Returns(false);
+            _testObject = new AccountController(_authService, _tokenService, _logger);
+
+            var result = await _testObject.VerifyEmail(2, "code");
+
+            var badResult = result.Should().BeOfType<BadRequestObjectResult>().Which;
+            var apiResult = badResult.Value.Should().BeOfType<ApiResponse>().Which;
+            apiResult.StatusCode.Should().Be(400);
         }
     }
 }
