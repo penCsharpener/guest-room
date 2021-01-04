@@ -24,6 +24,7 @@ namespace GuestRoom.Api.Services.Security
         }
 
         public event EventHandler<RegistrationConfirmationEventArgs> OnConfirmationLinkCreated;
+        public event EventHandler<ForgotPasswordEventArgs> OnResetPasswordLinkCreated;
 
         public async Task<bool> RegisterAsync(AppUser user, RegistrationMetaData registrationMeta)
         {
@@ -85,6 +86,26 @@ namespace GuestRoom.Api.Services.Security
             var user = await _userManager.FindByEmailAsync(email);
 
             return user != null;
+        }
+
+        public async Task<bool> ResetPasswordAsync(string emailAddress, string clientUri)
+        {
+            var user = await _userManager.FindByEmailAsync(emailAddress);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            OnResetPasswordLinkCreated?.Invoke(this, new ForgotPasswordEventArgs(emailAddress, token));
+
+            token = WebUtility.UrlEncode(token);
+
+            await _emailService.SendAsync(user.Email, "Reset Password", $"<a href=\"{clientUri.Trim('/')}/?token={token}&email={user.Email}\">Reset Password</a>");
+
+            return true;
         }
     }
 }

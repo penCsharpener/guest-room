@@ -155,5 +155,44 @@ namespace GuestRoom.Api.Tests
 
             result.Should().BeFalse();
         }
+
+        [Fact]
+        public async Task ResetPasswordAsync_Sends_Email()
+        {
+            var userManager = Substitute.For<IUserManager>();
+            var user = new AppUser { Email = "jane.doe@email.com", DisplayName = "Jane Doe" };
+            userManager.FindByEmailAsync(Arg.Any<string>()).Returns(user);
+            userManager.GeneratePasswordResetTokenAsync(Arg.Any<AppUser>()).Returns("token");
+            ForgotPasswordEventArgs eventArgs = default;
+            _testObject = new AuthService(userManager, Substitute.For<ISignInManager>(), _emailService, _logger);
+
+            void Handler(object sender, ForgotPasswordEventArgs e)
+            {
+                eventArgs = e;
+            }
+
+            _testObject.OnResetPasswordLinkCreated += Handler;
+
+            var result = await _testObject.ResetPasswordAsync("jane.doe@email.com", "https://localhost:5001/api/resetpassword/");
+
+            result.Should().BeTrue();
+            eventArgs.Email.Should().Be("jane.doe@email.com");
+            eventArgs.Token.Should().Be("token");
+            await _emailService.Received(1).SendAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
+
+            _testObject.OnResetPasswordLinkCreated -= Handler;
+        }
+
+        [Fact]
+        public async Task ResetPasswordAsync_Doesnt_Find_User()
+        {
+            var userManager = Substitute.For<IUserManager>();
+            userManager.FindByEmailAsync(Arg.Any<string>()).Returns(default(AppUser));
+            _testObject = new AuthService(userManager, Substitute.For<ISignInManager>(), _emailService, _logger);
+
+            var result = await _testObject.ResetPasswordAsync("jane.doe@email.com", "https://localhost:5001/api/resetpassword/");
+
+            result.Should().BeFalse();
+        }
     }
 }

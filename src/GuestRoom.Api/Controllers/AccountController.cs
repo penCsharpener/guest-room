@@ -77,5 +77,23 @@ namespace GuestRoom.Api.Controllers
 
             return Ok();
         }
+
+        [HttpPost("ForgotPassword")]
+        public async Task<ActionResult> ForgotPasswort([FromBody] ForgotPasswordParameters parameters)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var result = await _authService.ResetPasswordAsync(parameters.EmailAddress, parameters.ClientUri);
+
+            if (!result)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
     }
 }

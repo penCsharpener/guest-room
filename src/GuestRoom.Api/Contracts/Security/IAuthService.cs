@@ -10,8 +10,10 @@ namespace GuestRoom.Api.Contracts.Security
         Task<AppUser> LoginAsync(string email, string userPassword);
         Task<bool> RegisterAsync(AppUser user, RegistrationMetaData registrationMeta);
         Task<bool> UserIsRegisteredAsync(string email);
+        Task<bool> ResetPasswordAsync(string emailAddress, string clientUri);
 
         event EventHandler<RegistrationConfirmationEventArgs> OnConfirmationLinkCreated;
+        event EventHandler<ForgotPasswordEventArgs> OnResetPasswordLinkCreated;
     }
 
     public record RegistrationMetaData
@@ -24,4 +26,6 @@ namespace GuestRoom.Api.Contracts.Security
     }
 
     public record RegistrationConfirmationEventArgs(int UserId, string Code) { }
+
+    public record ForgotPasswordEventArgs(string Email, string Token) { }
 }

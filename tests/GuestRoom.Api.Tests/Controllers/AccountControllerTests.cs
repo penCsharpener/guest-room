@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using GuestRoom.Api.Contracts.Security;
@@ -116,6 +117,41 @@ namespace GuestRoom.Api.Tests.Controllers
             var badResult = result.Should().BeOfType<BadRequestObjectResult>().Which;
             var apiResult = badResult.Value.Should().BeOfType<ApiResponse>().Which;
             apiResult.StatusCode.Should().Be(400);
+        }
+
+        [Fact]
+        public async Task Forgot_Password_Is_Triggered()
+        {
+            _authService.ResetPasswordAsync(Arg.Any<string>(), Arg.Any<string>()).Returns(true);
+            _testObject = new AccountController(_authService, _tokenService, _logger);
+
+            var result = await _testObject.ForgotPasswort(new ForgotPasswordParameters { ClientUri = "https://localhost:5001/api/account/passwordreset/", EmailAddress = "j.doe@email.com" });
+
+            result.Should().BeOfType<OkResult>();
+        }
+
+        [Fact]
+        public async Task Forgot_Password_Model_Invalid()
+        {
+            _authService.ResetPasswordAsync(Arg.Any<string>(), Arg.Any<string>()).Returns(true);
+            _testObject = new AccountController(_authService, _tokenService, _logger);
+            _testObject.ModelState.Clear();
+            _testObject.ModelState.AddModelError(Guid.NewGuid().ToString(), "error");
+
+            var result = await _testObject.ForgotPasswort(new ForgotPasswordParameters { ClientUri = null, EmailAddress = "j.doe@email.com" });
+
+            result.Should().BeOfType<BadRequestResult>();
+        }
+
+        [Fact]
+        public async Task Forgot_Password_Fails()
+        {
+            _authService.ResetPasswordAsync(Arg.Any<string>(), Arg.Any<string>()).Returns(false);
+            _testObject = new AccountController(_authService, _tokenService, _logger);
+
+            var result = await _testObject.ForgotPasswort(new());
+
+            result.Should().BeOfType<BadRequestResult>();
         }
     }
 }
