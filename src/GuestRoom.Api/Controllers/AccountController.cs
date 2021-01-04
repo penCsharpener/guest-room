@@ -79,7 +79,7 @@ namespace GuestRoom.Api.Controllers
         }
 
         [HttpPost("ForgotPassword")]
-        public async Task<ActionResult> ForgotPasswort([FromBody] ForgotPasswordParameters parameters)
+        public async Task<ActionResult> ForgotPassword([FromBody] ForgotPasswordDto parameters)
         {
             if (!ModelState.IsValid)
             {

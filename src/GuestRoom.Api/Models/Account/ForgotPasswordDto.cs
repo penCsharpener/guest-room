@@ -2,7 +2,7 @@
 
 namespace GuestRoom.Api.Models.Account
 {
-    public class ForgotPasswordParameters
+    public class ForgotPasswordDto
     {
         [Required]
         [EmailAddress]

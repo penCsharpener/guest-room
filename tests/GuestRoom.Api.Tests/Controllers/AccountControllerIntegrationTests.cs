@@ -89,7 +89,7 @@ namespace GuestRoom.Api.Tests.Controllers
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
-            var result = await _testObject.ForgotPasswort(new ForgotPasswordParameters { EmailAddress = "j.doe@email.com", ClientUri = "https://localhost:5001/api/account/resetpassword/" });
+            var result = await _testObject.ForgotPassword(new ForgotPasswordDto { EmailAddress = "j.doe@email.com", ClientUri = "https://localhost:5001/api/account/resetpassword/" });
 
             result.Should().BeOfType<OkResult>();
             forgotPasswordEventArgs.Email.Should().Be("j.doe@email.com");

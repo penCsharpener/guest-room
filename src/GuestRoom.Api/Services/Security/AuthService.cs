@@ -41,7 +41,7 @@ namespace GuestRoom.Api.Services.Security
 
             code = WebUtility.UrlEncode(code);
 
-            var link = $"{registrationMeta.RequestScheme}://{registrationMeta.RequestHostUrl}/{registrationMeta.ControllerName}/{registrationMeta.MethodName}?userId={user.Id}&code={code}";
+            var link = $"{registrationMeta.RequestScheme}://{registrationMeta.RequestHostUrl}/api/{registrationMeta.ControllerName}/{registrationMeta.MethodName}?userId={user.Id}&code={code}";
 
             await _emailService.SendAsync(user.Email, "Verify Email", $"<a href=\"{link}\">Verify Email</a>");
 

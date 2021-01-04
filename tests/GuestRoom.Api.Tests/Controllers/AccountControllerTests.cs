@@ -125,7 +125,7 @@ namespace GuestRoom.Api.Tests.Controllers
             _authService.ResetPasswordAsync(Arg.Any<string>(), Arg.Any<string>()).Returns(true);
             _testObject = new AccountController(_authService, _tokenService, _logger);
 
-            var result = await _testObject.ForgotPasswort(new ForgotPasswordParameters { ClientUri = "https://localhost:5001/api/account/passwordreset/", EmailAddress = "j.doe@email.com" });
+            var result = await _testObject.ForgotPassword(new ForgotPasswordDto { ClientUri = "https://localhost:5001/api/account/passwordreset/", EmailAddress = "j.doe@email.com" });
 
             result.Should().BeOfType<OkResult>();
         }
@@ -138,7 +138,7 @@ namespace GuestRoom.Api.Tests.Controllers
             _testObject.ModelState.Clear();
             _testObject.ModelState.AddModelError(Guid.NewGuid().ToString(), "error");
 
-            var result = await _testObject.ForgotPasswort(new ForgotPasswordParameters { ClientUri = null, EmailAddress = "j.doe@email.com" });
+            var result = await _testObject.ForgotPassword(new ForgotPasswordDto { ClientUri = null, EmailAddress = "j.doe@email.com" });
 
             result.Should().BeOfType<BadRequestResult>();
         }
@@ -149,7 +149,7 @@ namespace GuestRoom.Api.Tests.Controllers
             _authService.ResetPasswordAsync(Arg.Any<string>(), Arg.Any<string>()).Returns(false);
             _testObject = new AccountController(_authService, _tokenService, _logger);
 
-            var result = await _testObject.ForgotPasswort(new());
+            var result = await _testObject.ForgotPassword(new());
 
             result.Should().BeOfType<BadRequestResult>();
         }
