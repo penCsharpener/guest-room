@@ -24,7 +24,12 @@ namespace GuestRoom.Api.Extensions
             services.AddDbContext<AppDbContext>(options => { options.UseSqlite(configuration.GetConnectionString("SqliteConnection")); },
                                                 ServiceLifetime.Transient);
 
-            services.AddIdentity<AppUser, AppRole>(options => { options.SignIn.RequireConfirmedAccount = true; })
+            services.AddIdentity<AppUser, AppRole>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = true;
+                    options.User.RequireUniqueEmail = true;
+                    options.SignIn.RequireConfirmedEmail = true;
+                })
                 .AddRoles<AppRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();

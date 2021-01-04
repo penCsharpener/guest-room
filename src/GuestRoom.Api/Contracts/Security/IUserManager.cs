@@ -17,5 +17,6 @@ namespace GuestRoom.Api.Contracts.Security
         Task<string> GeneratePasswordResetTokenAsync(AppUser user);
         Task<IdentityResult> UpdateAsync(AppUser user);
         Task<IdentityResult> ConfirmEmailAsync(AppUser user, string code);
+        Task<IdentityResult> ResetPasswordAsync(AppUser user, string token, string newPassword);
     }
 }

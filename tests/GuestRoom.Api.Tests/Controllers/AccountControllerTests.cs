@@ -30,7 +30,7 @@ namespace GuestRoom.Api.Tests.Controllers
         public async Task User_Is_Registered()
         {
             _authService.UserIsRegisteredAsync(Arg.Any<string>()).Returns(false);
-            _authService.RegisterAsync(Arg.Any<AppUser>(), Arg.Any<RegistrationMetaData>()).Returns(true);
+            _authService.RegisterAsync(Arg.Any<AppUser>(), Arg.Any<string>(), Arg.Any<string>()).Returns(true);
             _testObject = new AccountController(_authService, _tokenService, _logger);
 
             var result = await _testObject.Register(new RegisterDto { DisplayName = "John Doe", Email = "j.doe@email.com", Password = "pwd123" });
@@ -58,7 +58,7 @@ namespace GuestRoom.Api.Tests.Controllers
         public async Task User_Cannot_Be_Created()
         {
             _authService.UserIsRegisteredAsync(Arg.Any<string>()).Returns(false);
-            _authService.RegisterAsync(Arg.Any<AppUser>(), Arg.Any<RegistrationMetaData>()).Returns(false);
+            _authService.RegisterAsync(Arg.Any<AppUser>(), Arg.Any<string>(), Arg.Any<string>()).Returns(false);
             _testObject = new AccountController(_authService, _tokenService, _logger);
 
             var result = await _testObject.Register(new RegisterDto { DisplayName = "John Doe", Email = "j.doe@email.com", Password = "pwd123" });
@@ -122,7 +122,7 @@ namespace GuestRoom.Api.Tests.Controllers
         [Fact]
         public async Task Forgot_Password_Is_Triggered()
         {
-            _authService.ResetPasswordAsync(Arg.Any<string>(), Arg.Any<string>()).Returns(true);
+            _authService.ForgotPasswordAsync(Arg.Any<string>(), Arg.Any<string>()).Returns(true);
             _testObject = new AccountController(_authService, _tokenService, _logger);
 
             var result = await _testObject.ForgotPassword(new ForgotPasswordDto { ClientUri = "https://localhost:5001/api/account/passwordreset/", EmailAddress = "j.doe@email.com" });
@@ -133,7 +133,7 @@ namespace GuestRoom.Api.Tests.Controllers
         [Fact]
         public async Task Forgot_Password_Model_Invalid()
         {
-            _authService.ResetPasswordAsync(Arg.Any<string>(), Arg.Any<string>()).Returns(true);
+            _authService.ForgotPasswordAsync(Arg.Any<string>(), Arg.Any<string>()).Returns(true);
             _testObject = new AccountController(_authService, _tokenService, _logger);
             _testObject.ModelState.Clear();
             _testObject.ModelState.AddModelError(Guid.NewGuid().ToString(), "error");
@@ -146,7 +146,7 @@ namespace GuestRoom.Api.Tests.Controllers
         [Fact]
         public async Task Forgot_Password_Fails()
         {
-            _authService.ResetPasswordAsync(Arg.Any<string>(), Arg.Any<string>()).Returns(false);
+            _authService.ForgotPasswordAsync(Arg.Any<string>(), Arg.Any<string>()).Returns(false);
             _testObject = new AccountController(_authService, _tokenService, _logger);
 
             var result = await _testObject.ForgotPassword(new());

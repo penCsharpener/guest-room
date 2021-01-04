@@ -72,5 +72,10 @@ namespace GuestRoom.Api.Services.Security
         {
             return _userManager.UpdateAsync(user);
         }
+
+        public Task<IdentityResult> ResetPasswordAsync(AppUser user, string token, string newPassword)
+        {
+            return _userManager.ResetPasswordAsync(user, token, newPassword);
+        }
     }
 }

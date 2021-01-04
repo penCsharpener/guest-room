@@ -173,7 +173,7 @@ namespace GuestRoom.Api.Tests
 
             _testObject.OnResetPasswordLinkCreated += Handler;
 
-            var result = await _testObject.ResetPasswordAsync("jane.doe@email.com", "https://localhost:5001/api/resetpassword/");
+            var result = await _testObject.ForgotPasswordAsync("jane.doe@email.com", "https://localhost:5001/api/resetpassword/");
 
             result.Should().BeTrue();
             eventArgs.Email.Should().Be("jane.doe@email.com");
@@ -190,7 +190,7 @@ namespace GuestRoom.Api.Tests
             userManager.FindByEmailAsync(Arg.Any<string>()).Returns(default(AppUser));
             _testObject = new AuthService(userManager, Substitute.For<ISignInManager>(), _emailService, _logger);
 
-            var result = await _testObject.ResetPasswordAsync("jane.doe@email.com", "https://localhost:5001/api/resetpassword/");
+            var result = await _testObject.ForgotPasswordAsync("jane.doe@email.com", "https://localhost:5001/api/resetpassword/");
 
             result.Should().BeFalse();
         }

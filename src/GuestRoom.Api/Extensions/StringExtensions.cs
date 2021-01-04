@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace GuestRoom.Api.Extensions
 {
@@ -12,6 +13,11 @@ namespace GuestRoom.Api.Extensions
         public static bool IsNotNullOrEmpty(this string text)
         {
             return !string.IsNullOrWhiteSpace(text);
+        }
+
+        public static string JoinString(this IEnumerable texts, string delimiter)
+        {
+            return string.Join(delimiter, texts);
         }
 
         public static string ToEmailForLogging(this string email)

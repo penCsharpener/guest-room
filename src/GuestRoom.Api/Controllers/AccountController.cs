@@ -5,6 +5,7 @@ using GuestRoom.Api.Extensions;
 using GuestRoom.Api.Models;
 using GuestRoom.Api.Models.Account;
 using GuestRoom.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -52,8 +53,7 @@ namespace GuestRoom.Api.Controllers
 
             var user = new AppUser { DisplayName = registerDto.DisplayName, Email = registerDto.Email, UserName = registerDto.Email };
 
-            var meta = new RegistrationMetaData { Password = registerDto.Password, RequestScheme = Request?.Scheme, RequestHostUrl = Request?.Host.ToString() };
-            var result = await _authService.RegisterAsync(user, meta);
+            var result = await _authService.RegisterAsync(user, registerDto.Password, $"{Request?.Scheme}://{Request?.Host}/api/account/{nameof(VerifyEmail)}");
 
             if (!result)
             {
@@ -78,7 +78,7 @@ namespace GuestRoom.Api.Controllers
             return Ok();
         }
 
-        [HttpPost("ForgotPassword")]
+        [HttpPost("forgotPassword")]
         public async Task<ActionResult> ForgotPassword([FromBody] ForgotPasswordDto parameters)
         {
             if (!ModelState.IsValid)
@@ -86,11 +86,55 @@ namespace GuestRoom.Api.Controllers
                 return BadRequest();
             }
 
-            var result = await _authService.ResetPasswordAsync(parameters.EmailAddress, parameters.ClientUri);
+            var result = await _authService.ForgotPasswordAsync(parameters.EmailAddress, parameters.ClientUri);
 
             if (!result)
             {
                 return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        [HttpGet("resetPassword")]
+        public async Task<ActionResult> ResetPassword([FromQuery] ResetPasswordDto parameters)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var result = await _authService.ResetPasswordAsync(parameters.Email, parameters.Token, parameters.Password);
+
+            if (!result)
+            {
+                return BadRequest("User not found or error during password reset.");
+            }
+
+            return Ok();
+        }
+
+        [HttpPost("changeemail")]
+        [Authorize]
+        public async Task<ActionResult> ChangeEmail(ChangePasswordDto parameters)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var userExists = await _authService.UserIsRegisteredAsync(parameters.NewEmail);
+
+            if (userExists)
+            {
+                return new BadRequestObjectResult(new ApiValidationErrorResponse { Errors = new[] { "Email address is in use." } });
+            }
+
+            var result = await _authService.ChangeEmailAsync(parameters.UserId, parameters.Password, parameters.NewEmail, $"{Request.Scheme}://{Request.Host}/api/account/{nameof(VerifyEmail)}/");
+
+            if (!result)
+            {
+                return BadRequest("User not found or couldn't send token for new email.");
             }
 
             return Ok();

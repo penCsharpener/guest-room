@@ -8,21 +8,14 @@ namespace GuestRoom.Api.Contracts.Security
     {
         Task<bool> ConfirmEmailAsync(int userId, string code);
         Task<AppUser> LoginAsync(string email, string userPassword);
-        Task<bool> RegisterAsync(AppUser user, RegistrationMetaData registrationMeta);
+        Task<bool> RegisterAsync(AppUser user, string password, string verifyEndpointUri);
         Task<bool> UserIsRegisteredAsync(string email);
-        Task<bool> ResetPasswordAsync(string emailAddress, string clientUri);
+        Task<bool> ForgotPasswordAsync(string emailAddress, string clientUri);
+        Task<bool> ResetPasswordAsync(string email, string token, string password);
+        Task<bool> ChangeEmailAsync(int userId, string password, string newEmail, string clientUri);
 
         event EventHandler<RegistrationConfirmationEventArgs> OnConfirmationLinkCreated;
         event EventHandler<ForgotPasswordEventArgs> OnResetPasswordLinkCreated;
-    }
-
-    public record RegistrationMetaData
-    {
-        public string Password { get; init; }
-        public string MethodName { get; init; } = "verifyemail";
-        public string ControllerName { get; init; } = "account";
-        public string RequestScheme { get; init; }
-        public string RequestHostUrl { get; init; }
     }
 
     public record RegistrationConfirmationEventArgs(int UserId, string Code) { }
