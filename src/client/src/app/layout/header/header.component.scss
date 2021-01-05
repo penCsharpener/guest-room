@@ -1,15 +1,22 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .header {
   display: flex;
   flex-direction: row;
 
-  ul {
+  .header__nav-items {
     display: flex;
     flex-direction: row;
-  
-    li {
+    margin-left: 5rem;
+    padding: .5rem 6rem 0 2rem;
+    font-size: 125%;;
+
+    .header__nav-item {
       margin: 0 2rem;
       padding: 0.5rem;
-      list-style: none;
     }
   }
 }
