@@ -8,6 +8,7 @@ import { HomeComponent } from './modules/main/home/home.component';
 import { RoomComponent } from './modules/main/room/room.component';
 import { LegalComponent } from './modules/main/legal/legal.component';
 import { ContactComponent } from './modules/main/contact/contact.component';
+import { LoginModule } from './modules/account/login/login.module';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,13 @@ import { ContactComponent } from './modules/main/contact/contact.component';
     HomeComponent,
     RoomComponent,
     LegalComponent,
-    ContactComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
     LayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]
