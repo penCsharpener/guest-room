@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../../../../shared/modules/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -9,7 +11,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [LoginComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    MaterialModule,
+    ReactiveFormsModule,
+    FlexLayoutModule
   ]
 })
 export class LoginModule { }

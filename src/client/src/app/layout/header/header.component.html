@@ -1,7 +1,8 @@
-<header class="header">
-  <h1><a routerLink="/">Guest room</a></h1>
-  <div class="header__nav-items">
-  <a class="header__nav-item" routerLink="/main/room/1">Room 1</a>
-  <a class="header__nav-item" routerLink="/main/room/2">Room 2</a>
-</div>
-</header>
+<mat-toolbar>
+  <a routerLink="/">Guest room</a>
+  <span fxFlex></span>
+  <ul fxLayout="row" fxLayoutGap="15px">
+    <li><a routerLink="/main/room/1">Room 1</a></li>
+    <li><a routerLink="/main/room/2">Room 2</a></li>
+  </ul>
+</mat-toolbar>

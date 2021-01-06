@@ -1,4 +1,7 @@
-<main class="main">
-  <router-outlet></router-outlet>
-</main>
-
+<div fxFlexFill fxLayout="column">
+  <app-header></app-header>
+  <div fxFlex class="main" fxLayout="column" fxLayoutAlign="start center">
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</div>

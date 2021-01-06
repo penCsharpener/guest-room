@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +10,7 @@ import { RoomComponent } from './modules/main/room/room.component';
 import { LegalComponent } from './modules/main/legal/legal.component';
 import { ContactComponent } from './modules/main/contact/contact.component';
 import { LoginModule } from './modules/account/login/login.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { LoginModule } from './modules/account/login/login.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
     LayoutModule,
     AppRoutingModule,
     LoginModule
