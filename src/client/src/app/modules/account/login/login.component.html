@@ -5,14 +5,14 @@
         <div fxLayout="column" fxLayoutGap="20px" fxLayoutGap.xs="20px" fxLayoutAlign="start center">
           <div fxLayout="column" fxLayoutAlign="start center" class="input-row">
             <mat-form-field appearance="outline">
-              <mat-label>E-Mail</mat-label>
+              <mat-label>Email</mat-label>
               <input matInput placeholder="E-Mail" formControlName="email" autofocus>
-              <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Der Wert muss angegeben werden.</mat-error>
+              <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Required value.</mat-error>
             </mat-form-field>
           </div>
           <div fxLayout="column" fxLayoutAlign="start center" class="input-row">
             <mat-form-field>
-              <mat-label>Passwort</mat-label>
+              <mat-label>Password</mat-label>
               <input matInput placeholder="Password" formControlName="password" maxlength="10" (keyup.enter)="login()">
             </mat-form-field>
           </div>
@@ -20,8 +20,9 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
+      <span fxFlex></span>
       <button mat-raised-button (click)="login()">
-        Anmelden
+        Login
       </button>
     </mat-card-actions>
   </mat-card>
