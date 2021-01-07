@@ -11,6 +11,7 @@ import { LegalComponent } from './modules/main/legal/legal.component';
 import { ContactComponent } from './modules/main/contact/contact.component';
 import { LoginModule } from './modules/account/login/login.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SettingsModule } from './modules/settings/settings.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     LayoutModule,
     AppRoutingModule,
+    SettingsModule,
     LoginModule
   ],
   providers: [],
