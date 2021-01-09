@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using GuestRoom.Api.Controllers.Settings.GetRequests;
 using GuestRoom.Api.Controllers.Settings.UpdateCommands;
+using GuestRoom.Domain.Models.Content;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,11 +21,11 @@ namespace GuestRoom.Api.Controllers.Settings
         }
 
         [HttpGet("contact")]
-        public async Task<ActionResult> GetContact()
+        public async Task<ContactModel> GetContact()
         {
             var response = await _mediator.Send(new GetContactRequest());
 
-            return Ok();
+            return response.Contact;
         }
 
         [HttpGet("home")]

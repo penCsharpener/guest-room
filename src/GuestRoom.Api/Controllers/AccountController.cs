@@ -27,7 +27,7 @@ namespace GuestRoom.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        public async Task<ActionResult<UserDto>> Login([FromBody] LoginDto loginDto, [FromQuery] string ReturnUrl = null)
         {
             var user = await _authService.LoginAsync(loginDto.Email, loginDto.Password);
 
