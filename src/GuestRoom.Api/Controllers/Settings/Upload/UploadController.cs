@@ -1,0 +1,29 @@
+﻿using System.Threading.Tasks;
+using GuestRoom.Api.Controllers.Settings.Upload.Requests;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace GuestRoom.Api.Controllers.Settings.Upload
+{
+    [ApiController]
+    [Authorize]
+    [Route("api/settings/[controller]")]
+    public class UploadController : ControllerBase
+    {
+        private readonly IMediator _mediator;
+
+        public UploadController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Upload([FromForm] ImageUploadApiModel model)
+        {
+            var response = await _mediator.Send(new UploadFileRequest { Id = model.Id, ImageName = model.ImageName, FileContent = model.ToRawFile() });
+
+            return Ok();
+        }
+    }
+}
