@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using GuestRoom.Api.Controllers.Settings.Upload.Requests;
+﻿using GuestRoom.Api.Controllers.Settings.Upload.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GuestRoom.Api.Controllers.Settings.Upload
 {

@@ -30,4 +30,8 @@
     <ProjectReference Include="..\GuestRoom.Domain\GuestRoom.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Assets\Images\" />
+  </ItemGroup>
+
 </Project>

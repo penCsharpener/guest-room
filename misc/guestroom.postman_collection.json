@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "d1e78d78-c0fa-4d3f-9b39-a2b41370dc96",
+		"name": "guestroom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "settings",
+			"item": [
+				{
+					"name": "get contact",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{collection_url}}Settings/contact",
+							"host": [
+								"{{collection_url}}Settings"
+							],
+							"path": [
+								"contact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Disposition",
+								"value": "undefined",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "ImageName",
+									"value": "image-1.png",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "{{image_1}}"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{collection_url}}Settings/upload",
+							"host": [
+								"{{collection_url}}Settings"
+							],
+							"path": [
+								"upload"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"gr_token\", jsonData.token);\r",
+							"//pm.collectionVariables.set('api_client_token', jsonData.access_token)\r",
+							"//pm.environmentVariables.set('varname', 'varvalue');\r",
+							"//pm.globalVariables.set('varname', 'varvalue');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"j.doe@example.com\",\r\n    \"password\": \"Pwd123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{collection_url}}account/login",
+					"host": [
+						"{{collection_url}}account"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"gr_token\", jsonData.token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"displayName\": \"John Doe\",\r\n    \"email\": \"j.doe@example.com\",\r\n    \"password\": \"Pwd123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{collection_url}}account/register",
+					"host": [
+						"{{collection_url}}account"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{gr_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "gr_token",
+			"value": ""
+		},
+		{
+			"key": "collection_url",
+			"value": "https://localhost:5001/api/"
+		},
+		{
+			"key": "image-1.png",
+			"value": "C:\\Users\\Matthias\\Downloads\\image-1.jpg"
+		}
+	]
+}
