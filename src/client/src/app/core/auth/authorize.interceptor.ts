@@ -5,14 +5,25 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthorizeInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private router: Router) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request);
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(request).pipe(
+      catchError(res => {
+        if (res.status === 403) {
+          this.router.navigate(['/account/login']);
+          return of(<HttpEvent<any>>{});
+        } else {
+          return throwError(res);
+        }
+      })
+    );
   }
 }
