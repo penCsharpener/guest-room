@@ -12,6 +12,8 @@ import { ContactComponent } from './modules/main/contact/contact.component';
 import { LoginModule } from './modules/account/login/login.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SettingsModule } from './modules/settings/settings.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthorizeInterceptor } from './core/auth/authorize.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,13 @@ import { SettingsModule } from './modules/settings/settings.module';
     SettingsModule,
     LoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizeInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
