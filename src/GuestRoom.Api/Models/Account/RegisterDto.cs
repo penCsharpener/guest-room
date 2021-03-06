@@ -13,5 +13,8 @@ namespace GuestRoom.Api.Models.Account
 
         [Required]
         public string Password { get; set; }
+
+        [Required]
+        public string PasswordConfirm { get; set; }
     }
 }

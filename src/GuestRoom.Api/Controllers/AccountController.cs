@@ -1,6 +1,4 @@
-﻿using System.Net;
-using System.Threading.Tasks;
-using GuestRoom.Api.Contracts.Security;
+﻿using GuestRoom.Api.Contracts.Security;
 using GuestRoom.Api.Extensions;
 using GuestRoom.Api.Models;
 using GuestRoom.Api.Models.Account;
@@ -8,6 +6,8 @@ using GuestRoom.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace GuestRoom.Api.Controllers
 {
@@ -44,6 +44,11 @@ namespace GuestRoom.Api.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
+            if (registerDto.Password != registerDto.PasswordConfirm)
+            {
+                return BadRequest(new ApiResponse(HttpStatusCode.BadRequest, "Password and confirmation don't match."));
+            }
+
             var userExists = await _authService.UserIsRegisteredAsync(registerDto.Email);
 
             if (userExists)

@@ -9,12 +9,11 @@ import { HomeComponent } from './modules/main/home/home.component';
 import { RoomComponent } from './modules/main/room/room.component';
 import { LegalComponent } from './modules/main/legal/legal.component';
 import { ContactComponent } from './modules/main/contact/contact.component';
-import { LoginModule } from './modules/account/login/login.module';
+import { AccountModule } from './modules/account/account.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SettingsModule } from './modules/settings/settings.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthorizeInterceptor } from './core/auth/interceptors/authorize.interceptor';
-import { RegisterComponent } from './modules/account/register/register.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +22,6 @@ import { RegisterComponent } from './modules/account/register/register.component
     RoomComponent,
     LegalComponent,
     ContactComponent,
-    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +31,7 @@ import { RegisterComponent } from './modules/account/register/register.component
     HttpClientModule,
     AppRoutingModule,
     SettingsModule,
-    LoginModule
+    AccountModule
   ],
   providers: [
     {

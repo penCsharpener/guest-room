@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    console.log('file: login.component.ts | line 25 | LoginComponent | login | this', this);
     this.authService.login(this.loginForm.value).subscribe(() => {
       console.log('user logged in');
     }, error => {

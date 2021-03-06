@@ -34,6 +34,17 @@ export class AuthService {
     )
   }
 
+  register(values: any) {
+    return this.http.post<IUser>(this.baseUrl + '/account/register', values).pipe(
+      map((user: IUser) => {
+        if (user) {
+          localStorage.setItem('token', user.token);
+          this.currentUserSubject.next(user);
+        }
+      })
+    )
+  }
+
   login(values: any) {
     return this.http.post<IUser>(this.baseUrl + '/account/login', values).pipe(
       map((user: IUser) => {
