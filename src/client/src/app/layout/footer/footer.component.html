@@ -1,5 +1,11 @@
 <footer class="footer" fxLayout="start center" fxLayoutGap="20px">
   <a routerLink="/main/contact">Contact</a>
   <a fxFlex routerLink="/main/legal">Legal</a>
-  <a routerLink="/account/login">Login</a>
+  <ng-container *ngIf="(currentUser$ | async) === null">
+    <a routerLink="/account/login">Login</a>
+  </ng-container>
+  <ng-container *ngIf="currentUser$ | async">
+    <a>Welcome {{(currentUser$ | async)?.displayName}}</a>
+    <a (click)="logout()">Logout</a>
+  </ng-container>
 </footer>
