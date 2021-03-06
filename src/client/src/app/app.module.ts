@@ -14,6 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SettingsModule } from './modules/settings/settings.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthorizeInterceptor } from './core/auth/interceptors/authorize.interceptor';
+import { RegisterComponent } from './modules/account/register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AuthorizeInterceptor } from './core/auth/interceptors/authorize.interce
     HomeComponent,
     RoomComponent,
     LegalComponent,
-    ContactComponent
+    ContactComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
