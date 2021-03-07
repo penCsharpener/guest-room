@@ -70,7 +70,7 @@ namespace GuestRoom.Api.Controllers
             return StatusCode(201);
         }
 
-        [HttpGet("verifyemail")]
+        [HttpGet("email/verify")]
         public async Task<ActionResult> VerifyEmail(int userId, string code)
         {
             var result = await _authService.ConfirmEmailAsync(userId, code);
@@ -83,7 +83,7 @@ namespace GuestRoom.Api.Controllers
             return Ok();
         }
 
-        [HttpPost("forgotPassword")]
+        [HttpPost("password/forgot")]
         public async Task<ActionResult> ForgotPassword([FromBody] ForgotPasswordDto parameters)
         {
             if (!ModelState.IsValid)
@@ -101,7 +101,7 @@ namespace GuestRoom.Api.Controllers
             return Ok();
         }
 
-        [HttpGet("resetPassword")]
+        [HttpGet("password/reset")]
         public async Task<ActionResult> ResetPassword([FromQuery] ResetPasswordDto parameters)
         {
             if (!ModelState.IsValid)
@@ -119,7 +119,7 @@ namespace GuestRoom.Api.Controllers
             return Ok();
         }
 
-        [HttpPost("changeemail")]
+        [HttpPost("email/change")]
         [Authorize]
         public async Task<ActionResult> ChangeEmail(ChangePasswordDto parameters)
         {
