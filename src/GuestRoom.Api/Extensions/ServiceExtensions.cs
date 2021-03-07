@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
-using GuestRoom.Api.Contracts.Security;
+﻿using GuestRoom.Api.Contracts.Security;
 using GuestRoom.Api.Models.Configuration;
 using GuestRoom.Api.Services.Security;
 using GuestRoom.Domain;
@@ -17,6 +14,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Text;
 
 namespace GuestRoom.Api.Extensions
 {
@@ -33,6 +33,14 @@ namespace GuestRoom.Api.Extensions
                     options.SignIn.RequireConfirmedAccount = true;
                     options.User.RequireUniqueEmail = true;
                     options.SignIn.RequireConfirmedEmail = true;
+#if DEBUG
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 1;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredUniqueChars = 1;
+#endif
                 })
                 .AddRoles<AppRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
