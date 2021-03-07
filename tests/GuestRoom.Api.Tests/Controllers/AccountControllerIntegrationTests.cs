@@ -46,8 +46,9 @@ namespace GuestRoom.Api.Tests.Controllers
 
             users.Count.Should().Be(1);
             users[0].DisplayName.Should().Be("John Doe");
+            users[0].EmailConfirmed.Should().Be(false);
 
-            result.Value.DisplayName.Should().Be("John Doe");
+            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(201);
 
             var verifyResult = await _testObject.VerifyEmail(confirmationEventArgs.UserId, confirmationEventArgs.Code);
 

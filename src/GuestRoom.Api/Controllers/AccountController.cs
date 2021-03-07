@@ -42,11 +42,11 @@ namespace GuestRoom.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        public async Task<ActionResult> Register(RegisterDto registerDto)
         {
             if (registerDto.Password != registerDto.PasswordConfirm)
             {
-                return BadRequest(new ApiResponse(HttpStatusCode.BadRequest, "Password and confirmation don't match."));
+                return BadRequest(new ApiValidationErrorResponse { Errors = new[] { "Password and password confirmation don't match." } });
             }
 
             var userExists = await _authService.UserIsRegisteredAsync(registerDto.Email);
@@ -67,7 +67,7 @@ namespace GuestRoom.Api.Controllers
 
             _logger.LogInformation($"New user '{registerDto.Email.ToEmailForLogging()}' was registered.");
 
-            return new UserDto { DisplayName = user.DisplayName, Token = _tokenService.CreateToken(user), Email = user.Email };
+            return StatusCode(201);
         }
 
         [HttpGet("verifyemail")]

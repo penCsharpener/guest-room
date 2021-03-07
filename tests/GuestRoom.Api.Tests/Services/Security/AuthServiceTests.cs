@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using FluentAssertions;
 using GuestRoom.Api.Contracts.Security;
 using GuestRoom.Api.Services.Security;
@@ -10,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NETCore.MailKit.Core;
 using NSubstitute;
+using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GuestRoom.Api.Tests
@@ -41,8 +41,7 @@ namespace GuestRoom.Api.Tests
             userManager.CreateAsync(Arg.Any<AppUser>(), Arg.Any<string>()).Returns(IdentityResult.Success);
             _testObject = new AuthService(userManager, Substitute.For<ISignInManager>(), _emailService, _logger);
 
-            var meta = new RegistrationMetaData { Password = "pwd123PGD!", RequestScheme = "https://", RequestHostUrl = "localhost:5000" };
-            var result = await _testObject.RegisterAsync(new AppUser { Email = "j.doe@email.com", DisplayName = "John Doe" }, meta);
+            var result = await _testObject.RegisterAsync(new AppUser { Email = "j.doe@email.com", DisplayName = "John Doe" }, "pwd123PGD!", "https://localhost:5000");
 
             result.Should().BeTrue();
         }
@@ -126,7 +125,7 @@ namespace GuestRoom.Api.Tests
             userManager.CreateAsync(Arg.Any<AppUser>(), Arg.Any<string>()).Returns(IdentityResult.Failed(new IdentityError()));
             _testObject = new AuthService(userManager, Substitute.For<ISignInManager>(), _emailService, _logger);
 
-            var result = await _testObject.RegisterAsync(new AppUser { Email = "j.doe@email.com", DisplayName = "John Doe" }, new RegistrationMetaData());
+            var result = await _testObject.RegisterAsync(new AppUser { Email = "j.doe@email.com", DisplayName = "John Doe" }, "pwd123", "");
 
             result.Should().BeFalse();
         }

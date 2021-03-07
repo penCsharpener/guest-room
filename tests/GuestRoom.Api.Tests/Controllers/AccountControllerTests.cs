@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using GuestRoom.Api.Contracts.Security;
 using GuestRoom.Api.Controllers;
 using GuestRoom.Api.Models;
@@ -10,6 +7,9 @@ using GuestRoom.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GuestRoom.Api.Tests.Controllers
@@ -33,10 +33,9 @@ namespace GuestRoom.Api.Tests.Controllers
             _authService.RegisterAsync(Arg.Any<AppUser>(), Arg.Any<string>(), Arg.Any<string>()).Returns(true);
             _testObject = new AccountController(_authService, _tokenService, _logger);
 
-            var result = await _testObject.Register(new RegisterDto { DisplayName = "John Doe", Email = "j.doe@email.com", Password = "pwd123" });
+            var result = await _testObject.Register(new RegisterDto { DisplayName = "John Doe", Email = "j.doe@email.com", Password = "pwd123", PasswordConfirm = "pwd123" });
 
-            result.Value.DisplayName.Should().Be("John Doe");
-            result.Result.Should().BeNull();
+            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(201);
         }
 
         [Fact]
@@ -45,13 +44,26 @@ namespace GuestRoom.Api.Tests.Controllers
             _authService.UserIsRegisteredAsync(Arg.Any<string>()).Returns(true);
             _testObject = new AccountController(_authService, _tokenService, _logger);
 
-            var result = await _testObject.Register(new RegisterDto { DisplayName = "John Doe", Email = "j.doe@email.com", Password = "pwd123" });
+            var result = await _testObject.Register(new RegisterDto { DisplayName = "John Doe", Email = "j.doe@email.com", Password = "pwd123", PasswordConfirm = "pwd123" });
 
-            var objResult = result.Result.Should().BeOfType<BadRequestObjectResult>().Which;
+            var objResult = result.Should().BeOfType<BadRequestObjectResult>().Which;
             objResult.StatusCode.Should().Be(400);
             var apiResult = objResult.Value.Should().BeOfType<ApiValidationErrorResponse>().Which;
             apiResult.Errors.Count().Should().Be(1);
-            result.Value.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task User_Password_And_PasswordConfirm_Dont_Match()
+        {
+            _authService.UserIsRegisteredAsync(Arg.Any<string>()).Returns(true);
+            _testObject = new AccountController(_authService, _tokenService, _logger);
+
+            var result = await _testObject.Register(new RegisterDto { DisplayName = "John Doe", Email = "j.doe@email.com", Password = "pwd123", PasswordConfirm = "pwd1234" });
+
+            var objResult = result.Should().BeOfType<BadRequestObjectResult>().Which;
+            objResult.StatusCode.Should().Be(400);
+            var apiResult = objResult.Value.Should().BeOfType<ApiValidationErrorResponse>().Which;
+            apiResult.Errors.Count().Should().Be(1);
         }
 
         [Fact]
@@ -61,12 +73,11 @@ namespace GuestRoom.Api.Tests.Controllers
             _authService.RegisterAsync(Arg.Any<AppUser>(), Arg.Any<string>(), Arg.Any<string>()).Returns(false);
             _testObject = new AccountController(_authService, _tokenService, _logger);
 
-            var result = await _testObject.Register(new RegisterDto { DisplayName = "John Doe", Email = "j.doe@email.com", Password = "pwd123" });
+            var result = await _testObject.Register(new RegisterDto { DisplayName = "John Doe", Email = "j.doe@email.com", Password = "pwd123", PasswordConfirm = "pwd123" });
 
-            var objResult = result.Result.Should().BeOfType<BadRequestObjectResult>().Which;
+            var objResult = result.Should().BeOfType<BadRequestObjectResult>().Which;
             objResult.StatusCode.Should().Be(400);
             var apiResult = objResult.Value.Should().BeOfType<ApiResponse>().Which;
-            result.Value.Should().BeNull();
         }
 
         [Fact]
