@@ -58,4 +58,11 @@ export class AuthService {
     this.currentUserSubject.next(<IUser><unknown>null);
     this.router.navigateByUrl('/');
   }
+
+  verifyEmail(email: string, code: string) {
+    console.log("🚀 ~ file: auth.service.ts ~ line 63 ~ AuthService ~ verifyEmail ~ code", code)
+    
+    console.log("🚀 ~ file: auth.service.ts ~ line 66 ~ AuthService ~ verifyEmail ~ this.baseUrl", this.baseUrl)
+    return this.http.post(this.baseUrl + `/account/email/verify`, { email: email, code: code });
+  }
 }

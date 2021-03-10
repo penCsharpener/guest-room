@@ -1,24 +1,24 @@
-﻿using System;
+﻿using GuestRoom.Domain.Models;
+using System;
 using System.Threading.Tasks;
-using GuestRoom.Domain.Models;
 
 namespace GuestRoom.Api.Contracts.Security
 {
     public interface IAuthService
     {
-        Task<bool> ConfirmEmailAsync(int userId, string code);
+        Task<bool> ConfirmEmailAsync(string userEmail, string code);
         Task<AppUser> LoginAsync(string email, string userPassword);
-        Task<bool> RegisterAsync(AppUser user, string password, string verifyEndpointUri);
+        Task<bool> RegisterAsync(AppUser user, string password);
         Task<bool> UserIsRegisteredAsync(string email);
-        Task<bool> ForgotPasswordAsync(string emailAddress, string clientUri);
+        Task<bool> ForgotPasswordAsync(string emailAddress);
         Task<bool> ResetPasswordAsync(string email, string token, string password);
-        Task<bool> ChangeEmailAsync(int userId, string password, string newEmail, string clientUri);
+        Task<bool> ChangeEmailAsync(int userId, string password, string newEmail);
 
         event EventHandler<RegistrationConfirmationEventArgs> OnConfirmationLinkCreated;
         event EventHandler<ForgotPasswordEventArgs> OnResetPasswordLinkCreated;
     }
 
-    public record RegistrationConfirmationEventArgs(int UserId, string Code) { }
+    public record RegistrationConfirmationEventArgs(string UserEmail, string Code) { }
 
     public record ForgotPasswordEventArgs(string Email, string Token) { }
 }

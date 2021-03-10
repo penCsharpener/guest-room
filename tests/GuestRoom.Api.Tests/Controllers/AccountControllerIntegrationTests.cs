@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using GuestRoom.Api.Contracts.Security;
 using GuestRoom.Api.Controllers;
 using GuestRoom.Api.Models.Account;
@@ -11,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GuestRoom.Api.Tests.Controllers
@@ -50,7 +50,7 @@ namespace GuestRoom.Api.Tests.Controllers
 
             result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(201);
 
-            var verifyResult = await _testObject.VerifyEmail(confirmationEventArgs.UserId, confirmationEventArgs.Code);
+            var verifyResult = await _testObject.VerifyEmail(new VerifyEmailDto { Email = confirmationEventArgs.UserEmail, Code = confirmationEventArgs.Code });
 
             var user = await context.Users.FirstOrDefaultAsync(x => x.Email == "j.doe@email.com");
             user.EmailConfirmed.Should().BeTrue();
@@ -90,7 +90,7 @@ namespace GuestRoom.Api.Tests.Controllers
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
-            var result = await _testObject.ForgotPassword(new ForgotPasswordDto { EmailAddress = "j.doe@email.com", ClientUri = "https://localhost:5001/api/account/resetpassword/" });
+            var result = await _testObject.ForgotPassword(new ForgotPasswordDto { EmailAddress = "j.doe@email.com" });
 
             result.Should().BeOfType<OkResult>();
             forgotPasswordEventArgs.Email.Should().Be("j.doe@email.com");

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using GuestRoom.Api.Contracts.Security;
+﻿using GuestRoom.Api.Contracts.Security;
 using GuestRoom.Api.Extensions;
+using GuestRoom.Api.Models.Configuration;
 using GuestRoom.Domain.Models;
 using Microsoft.Extensions.Logging;
 using NETCore.MailKit.Core;
+using System;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace GuestRoom.Api.Services.Security
 {
@@ -16,9 +17,15 @@ namespace GuestRoom.Api.Services.Security
         private readonly ILogger<AuthService> _logger;
         private readonly ISignInManager _signInManager;
         private readonly IUserManager _userManager;
+        private readonly AppSettings _appSettings;
 
-        public AuthService(IUserManager userManager, ISignInManager signInManager, IEmailService emailService, ILogger<AuthService> logger)
+        private const string EMAIL_VERIFY_ROUTE = "account/email/verify";
+        private const string EMAIL_CHANGE_ROUTE = "account/email/change";
+        private const string PASSWORD_FORGOT_ROUTE = "account/password/reset";
+
+        public AuthService(AppSettings appSettings, IUserManager userManager, ISignInManager signInManager, IEmailService emailService, ILogger<AuthService> logger)
         {
+            _appSettings = appSettings;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailService = emailService;
@@ -28,7 +35,7 @@ namespace GuestRoom.Api.Services.Security
         public event EventHandler<RegistrationConfirmationEventArgs> OnConfirmationLinkCreated;
         public event EventHandler<ForgotPasswordEventArgs> OnResetPasswordLinkCreated;
 
-        public async Task<bool> RegisterAsync(AppUser user, string password, string verifyEndpointUri)
+        public async Task<bool> RegisterAsync(AppUser user, string password)
         {
             var result = await _userManager.CreateAsync(user, password);
 
@@ -39,20 +46,20 @@ namespace GuestRoom.Api.Services.Security
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-            OnConfirmationLinkCreated?.Invoke(this, new RegistrationConfirmationEventArgs(user.Id, code));
+            OnConfirmationLinkCreated?.Invoke(this, new RegistrationConfirmationEventArgs(user.Email.ToLower(), code));
 
             code = WebUtility.UrlEncode(code);
 
-            var link = $"{verifyEndpointUri}?userId={user.Id}&code={code}";
+            var link = $"{_appSettings.ClientUrl.Trim('/')}/{EMAIL_VERIFY_ROUTE}?email={user.Email}&code={code}";
 
             await _emailService.SendAsync(user.Email, "Verify Email", $"<a href=\"{link}\">Verify Email</a>");
 
             return true;
         }
 
-        public async Task<bool> ConfirmEmailAsync(int userId, string code)
+        public async Task<bool> ConfirmEmailAsync(string userEmail, string code)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByEmailAsync(userEmail);
 
             if (user == null)
             {
@@ -90,7 +97,7 @@ namespace GuestRoom.Api.Services.Security
             return user != null;
         }
 
-        public async Task<bool> ForgotPasswordAsync(string emailAddress, string clientUri)
+        public async Task<bool> ForgotPasswordAsync(string emailAddress)
         {
             var user = await _userManager.FindByEmailAsync(emailAddress);
 
@@ -105,7 +112,7 @@ namespace GuestRoom.Api.Services.Security
 
             token = WebUtility.UrlEncode(token);
 
-            await _emailService.SendAsync(user.Email, "Reset Password", $"<a href=\"{clientUri.Trim('/')}/?token={token}&email={user.Email}\">Reset Password</a>");
+            await _emailService.SendAsync(user.Email, "Reset Password", $"<a href=\"{_appSettings.ClientUrl.Trim('/')}/{PASSWORD_FORGOT_ROUTE}?token={token}&email={user.Email}\">Reset Password</a>");
 
             return true;
         }
@@ -131,7 +138,7 @@ namespace GuestRoom.Api.Services.Security
             return true;
         }
 
-        public async Task<bool> ChangeEmailAsync(int userId, string password, string newEmail, string clientUri)
+        public async Task<bool> ChangeEmailAsync(int userId, string password, string newEmail)
         {
             var user = await _userManager.FindByIdAsync(userId);
 
@@ -149,7 +156,7 @@ namespace GuestRoom.Api.Services.Security
 
             var token = await _userManager.GenerateChangeEmailTokenAsync(user, newEmail);
 
-            await _emailService.SendAsync(newEmail, "Change default email address", $"<a href=\"{clientUri.Trim('/')}/?code={token}&userId={user.Id}\">Change Email</a>");
+            await _emailService.SendAsync(newEmail, "Change default email address", $"<a href=\"{_appSettings.ClientUrl.Trim('/')}/{EMAIL_CHANGE_ROUTE}?code={token}&userId={user.Id}\">Change Email</a>");
 
             return true;
         }

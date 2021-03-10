@@ -16,9 +16,9 @@ namespace GuestRoom.Api.Services.Security
         private readonly SymmetricSecurityKey _key;
         private readonly Token _token;
 
-        public TokenService(IOptions<Token> token)
+        public TokenService(AppSettings appsettings)
         {
-            _token = token.Value;
+            _token = appsettings.Token;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_token.Key));
         }
 

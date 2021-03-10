@@ -7,8 +7,5 @@ namespace GuestRoom.Api.Models.Account
         [Required]
         [EmailAddress]
         public string EmailAddress { get; set; }
-
-        [Required]
-        public string ClientUri { get; set; }
     }
 }

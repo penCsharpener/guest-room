@@ -7,13 +7,11 @@ using GuestRoom.Domain.Providers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using NETCore.MailKit.Extensions;
-using NETCore.MailKit.Infrastructure.Internal;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
@@ -23,10 +21,9 @@ namespace GuestRoom.Api.Extensions
     [ExcludeFromCodeCoverage]
     internal static class ServiceExtensions
     {
-        internal static void AddEfCore(this IServiceCollection services, IConfiguration configuration)
+        internal static void AddEfCore(this IServiceCollection services, AppSettings appsettings, string connectionString)
         {
-            services.AddDbContext<AppDbContext>(options => { options.UseSqlite(configuration.GetConnectionString("SqliteConnection")); },
-                                                ServiceLifetime.Transient);
+            services.AddDbContext<AppDbContext>(options => { options.UseSqlite(connectionString); }, ServiceLifetime.Transient);
 
             services.AddIdentity<AppUser, AppRole>(options =>
                 {
@@ -46,21 +43,21 @@ namespace GuestRoom.Api.Extensions
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddJsonWebTokenConfiguration(configuration);
+            services.AddJsonWebTokenConfiguration(appsettings.Token);
 
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<ISignInManager, SignInManager>();
             services.AddTransient<ITokenService, TokenService>();
         }
 
-        internal static void AddGuestRoomServices(this IServiceCollection services, IConfiguration configuration)
+        internal static void AddGuestRoomServices(this IServiceCollection services, AppSettings appsettings)
         {
-            services.Configure<Token>(configuration.GetSection(nameof(Token)));
+            services.AddSingleton(appsettings);
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IFileProvider, FileProvider>();
             services.AddScoped<IJsonConverter, JsonConverter>();
             services.AddScoped<IContentStore, ContentStore>();
-            services.AddMailKit(config => config.UseMailKit(configuration.GetSection(nameof(MailKitOptions)).Get<MailKitOptions>()));
+            services.AddMailKit(config => config.UseMailKit(appsettings.MailKitOptions));
         }
 
         internal static IHost MigrateDatabase(this IHost host)
@@ -86,12 +83,11 @@ namespace GuestRoom.Api.Extensions
             return host;
         }
 
-        internal static void AddJsonWebTokenConfiguration(this IServiceCollection services, IConfiguration configuration)
+        internal static void AddJsonWebTokenConfiguration(this IServiceCollection services, Token tokenSettings)
         {
-            var jwtAppSettingOptions = configuration.GetSection(nameof(Token));
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtAppSettingOptions["Key"]));
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(tokenSettings.Key));
 
-            services.ConfigureJwtIssuerOptions(jwtAppSettingOptions, signingKey);
+            services.ConfigureJwtIssuerOptions(tokenSettings, signingKey);
 
             services.AddAuthentication(options =>
                 {
@@ -100,30 +96,30 @@ namespace GuestRoom.Api.Extensions
                 })
                 .AddJwtBearer(options =>
                 {
-                    options.ClaimsIssuer = jwtAppSettingOptions[nameof(Token.Issuer)];
-                    options.TokenValidationParameters = GetTokenValidationParameters(jwtAppSettingOptions, signingKey);
+                    options.ClaimsIssuer = tokenSettings.Issuer;
+                    options.TokenValidationParameters = GetTokenValidationParameters(tokenSettings, signingKey);
                     options.SaveToken = true;
                 });
         }
 
-        private static void ConfigureJwtIssuerOptions(this IServiceCollection services, IConfigurationSection jwtAppSettingOptions, SymmetricSecurityKey signingKey)
+        private static void ConfigureJwtIssuerOptions(this IServiceCollection services, Token tokenSettings, SymmetricSecurityKey signingKey)
         {
             services.Configure<Token>(options =>
             {
-                options.Audience = jwtAppSettingOptions[nameof(Token.Audience)];
-                options.Issuer = jwtAppSettingOptions[nameof(Token.Issuer)];
+                options.Audience = tokenSettings.Audience;
+                options.Issuer = tokenSettings.Issuer;
                 options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
             });
         }
 
-        private static TokenValidationParameters GetTokenValidationParameters(IConfigurationSection jwtAppSettingOptions, SymmetricSecurityKey signingKey)
+        private static TokenValidationParameters GetTokenValidationParameters(Token tokenSettings, SymmetricSecurityKey signingKey)
         {
             return new TokenValidationParameters
             {
                 ValidateIssuer = IsRelease(),
-                ValidIssuer = jwtAppSettingOptions[nameof(Token.Issuer)],
+                ValidIssuer = tokenSettings.Issuer,
                 ValidateAudience = IsRelease(),
-                ValidAudience = jwtAppSettingOptions[nameof(Token.Audience)],
+                ValidAudience = tokenSettings.Audience,
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = signingKey,
                 RequireExpirationTime = false,

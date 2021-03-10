@@ -58,7 +58,7 @@ namespace GuestRoom.Api.Controllers
 
             var user = new AppUser { DisplayName = registerDto.DisplayName, Email = registerDto.Email, UserName = registerDto.Email };
 
-            var result = await _authService.RegisterAsync(user, registerDto.Password, $"{Request?.Scheme}://{Request?.Host}/api/account/{nameof(VerifyEmail)}");
+            var result = await _authService.RegisterAsync(user, registerDto.Password);
 
             if (!result)
             {
@@ -70,10 +70,10 @@ namespace GuestRoom.Api.Controllers
             return StatusCode(201);
         }
 
-        [HttpGet("email/verify")]
-        public async Task<ActionResult> VerifyEmail(int userId, string code)
+        [HttpPost("email/verify")]
+        public async Task<ActionResult> VerifyEmail(VerifyEmailDto request)
         {
-            var result = await _authService.ConfirmEmailAsync(userId, code);
+            var result = await _authService.ConfirmEmailAsync(request.Email, request.Code);
 
             if (!result)
             {
@@ -91,7 +91,7 @@ namespace GuestRoom.Api.Controllers
                 return BadRequest();
             }
 
-            var result = await _authService.ForgotPasswordAsync(parameters.EmailAddress, parameters.ClientUri);
+            var result = await _authService.ForgotPasswordAsync(parameters.EmailAddress);
 
             if (!result)
             {
@@ -135,7 +135,7 @@ namespace GuestRoom.Api.Controllers
                 return new BadRequestObjectResult(new ApiValidationErrorResponse { Errors = new[] { "Email address is in use." } });
             }
 
-            var result = await _authService.ChangeEmailAsync(parameters.UserId, parameters.Password, parameters.NewEmail, $"{Request.Scheme}://{Request.Host}/api/account/{nameof(VerifyEmail)}/");
+            var result = await _authService.ChangeEmailAsync(parameters.UserId, parameters.Password, parameters.NewEmail);
 
             if (!result)
             {

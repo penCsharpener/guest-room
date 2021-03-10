@@ -2,7 +2,6 @@
 using GuestRoom.Api.Models.Configuration;
 using GuestRoom.Api.Services.Security;
 using GuestRoom.Domain.Models;
-using Microsoft.Extensions.Options;
 using Xunit;
 
 namespace GuestRoom.Api.Tests.Services.Security
@@ -13,7 +12,11 @@ namespace GuestRoom.Api.Tests.Services.Security
 
         public TokenServiceTests()
         {
-            _testObject = new TokenService(Options.Create(new Token { Key = "secureKeysecureKeysecureKeysecureKey", Issuer = "http://localhost:5001" }));
+            var appsettings = new AppSettings
+            {
+                Token = new Token { Key = "secureKeysecureKeysecureKeysecureKey", Issuer = "http://localhost:5001" }
+            };
+            _testObject = new TokenService(appsettings);
         }
 
         [Fact]
