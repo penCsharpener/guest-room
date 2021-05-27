@@ -60,9 +60,10 @@ export class AuthService {
   }
 
   verifyEmail(email: string, code: string) {
-    console.log("🚀 ~ file: auth.service.ts ~ line 63 ~ AuthService ~ verifyEmail ~ code", code)
-    
-    console.log("🚀 ~ file: auth.service.ts ~ line 66 ~ AuthService ~ verifyEmail ~ this.baseUrl", this.baseUrl)
     return this.http.post(this.baseUrl + `/account/email/verify`, { email: email, code: code });
+  }
+
+  resetPassword(email: string, token: string, password: string, passwordConfirm: string) {
+    return this.http.post(this.baseUrl + `/account/password/reset`, { email: email, token: token, password: password, confirmPassword: passwordConfirm });
   }
 }

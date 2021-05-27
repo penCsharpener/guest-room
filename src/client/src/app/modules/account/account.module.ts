@@ -6,9 +6,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../../shared/modules/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EmailVerifyComponent } from './email/verify/email-verify.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, EmailVerifyComponent],
+  declarations: [LoginComponent, RegisterComponent, EmailVerifyComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     MaterialModule,
