@@ -91,12 +91,7 @@ namespace GuestRoom.Api.Controllers
                 return BadRequest();
             }
 
-            var result = await _authService.ForgotPasswordAsync(parameters.EmailAddress);
-
-            if (!result)
-            {
-                return BadRequest();
-            }
+            await _authService.ForgotPasswordAsync(parameters.EmailAddress);
 
             return Ok();
         }
