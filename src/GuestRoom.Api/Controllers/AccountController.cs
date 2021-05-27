@@ -101,8 +101,8 @@ namespace GuestRoom.Api.Controllers
             return Ok();
         }
 
-        [HttpGet("password/reset")]
-        public async Task<ActionResult> ResetPassword([FromQuery] ResetPasswordDto parameters)
+        [HttpPost("password/reset")]
+        public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordDto parameters)
         {
             if (!ModelState.IsValid)
             {
