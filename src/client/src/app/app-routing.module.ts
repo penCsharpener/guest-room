@@ -8,6 +8,7 @@ import { HomeComponent } from './modules/main/home/home.component';
 import { RegisterComponent } from './modules/account/register/register.component';
 import { EmailVerifyComponent } from './modules/account/email/verify/email-verify.component';
 import { ResetPasswordComponent } from './modules/account/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './modules/account/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: 'main/contact', component: ContactComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'account/register', component: RegisterComponent },
   { path: 'account/email/verify', component: EmailVerifyComponent },
   { path: 'account/password/reset', component: ResetPasswordComponent },
+  { path: 'account/password/forgot', component: ForgotPasswordComponent },
   { path: 'main/room/:id', component: RoomComponent },
   { path: '', component: HomeComponent },
 ];

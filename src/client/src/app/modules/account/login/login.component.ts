@@ -30,4 +30,8 @@ export class LoginComponent implements OnInit {
       console.log(error);
     });
   }
+
+  forgotPassword() {
+    this.router.navigate(['/account/password/forgot']);
+  }
 }

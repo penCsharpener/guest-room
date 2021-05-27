@@ -7,9 +7,10 @@ import { MaterialModule } from '../../../shared/modules/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EmailVerifyComponent } from './email/verify/email-verify.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, EmailVerifyComponent, ResetPasswordComponent],
+  declarations: [LoginComponent, RegisterComponent, EmailVerifyComponent, ResetPasswordComponent, ForgotPasswordComponent],
   imports: [
     CommonModule,
     MaterialModule,

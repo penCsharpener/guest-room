@@ -63,6 +63,10 @@ export class AuthService {
     return this.http.post(this.baseUrl + `/account/email/verify`, { email: email, code: code });
   }
 
+  forgotPassword(email: string) {
+    return this.http.post(this.baseUrl + `/account/password/forgot`, { emailAddress: email });
+  }
+
   resetPassword(email: string, token: string, password: string, passwordConfirm: string) {
     return this.http.post(this.baseUrl + `/account/password/reset`, { email: email, token: token, password: password, confirmPassword: passwordConfirm });
   }

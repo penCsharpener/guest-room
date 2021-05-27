@@ -20,8 +20,9 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
+      <a mat-button (click)="forgotPassword()">Forgot password?</a>
       <span fxFlex></span>
-      <button mat-raised-button (click)="login()">
+      <button mat-raised-button [disabled]="loginForm.invalid" (click)="login()">
         Login
       </button>
     </mat-card-actions>
