@@ -28,5 +28,4 @@ export class ForgotPasswordComponent implements OnInit {
     });
     this.hasSubmitted = true;
   }
-
 }
