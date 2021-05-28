@@ -8,6 +8,7 @@
               <mat-label>Email</mat-label>
               <input matInput placeholder="E-Mail" formControlName="email" autofocus>
               <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Required value.</mat-error>
+              <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Email is not in a valid format.</mat-error>
             </mat-form-field>
           </div>
           <div fxLayout="column" fxLayoutAlign="start center" class="input-row">

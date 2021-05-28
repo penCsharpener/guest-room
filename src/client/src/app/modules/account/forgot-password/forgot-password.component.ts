@@ -14,7 +14,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { 
     this.forgotPasswordForm = this.formBuilder.group({
-      email: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -22,7 +22,6 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   submit() {
-    console.log("🚀 ~ file: forgot-password.component.ts ~ line 25 ~ ForgotPasswordComponent ~ this.authService.forgotPassword ~ this.forgotPasswordForm.value.email", this.forgotPasswordForm.value.email)
     this.authService.forgotPassword(this.forgotPasswordForm.value.email).subscribe(() => {
     }, error => {
       console.log(error);
