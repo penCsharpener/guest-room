@@ -27,5 +27,8 @@
         Login
       </button>
     </mat-card-actions>
+    <mat-card-actions>
+      <mat-error *ngIf="isLoginFailure === true">Login failed.</mat-error>
+    </mat-card-actions>
   </mat-card>
 </div>

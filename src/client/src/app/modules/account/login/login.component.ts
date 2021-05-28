@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/core/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  isLoginFailure = false;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.formBuilder.group({
@@ -22,12 +23,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    this.isLoginFailure = false;
     this.authService.login(this.loginForm.value).subscribe(() => {
       console.log('user logged in');
       this.router.navigate(['/']);
 
     }, error => {
       console.log(error);
+      this.isLoginFailure = true;
     });
   }
 
