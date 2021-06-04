@@ -13,6 +13,7 @@ namespace GuestRoom.Api.Contracts.Security
         Task<bool> ForgotPasswordAsync(string emailAddress);
         Task<bool> ResetPasswordAsync(string email, string token, string password);
         Task<bool> ChangeEmailAsync(int userId, string password, string newEmail);
+        Task<AppUser> FindByEmailAsync(string email);
 
         event EventHandler<RegistrationConfirmationEventArgs> OnConfirmationLinkCreated;
         event EventHandler<ForgotPasswordEventArgs> OnResetPasswordLinkCreated;

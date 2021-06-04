@@ -6,7 +6,9 @@ using GuestRoom.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GuestRoom.Api.Controllers
@@ -24,6 +26,22 @@ namespace GuestRoom.Api.Controllers
             _authService = authService;
             _tokenService = tokenService;
             _logger = logger;
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<UserDto>> GetUser()
+        {
+            var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+
+            var user = await _authService.FindByEmailAsync(email);
+
+            return new UserDto()
+            {
+                Email = user.Email,
+                Token = _tokenService.CreateToken(user),
+                DisplayName = user.DisplayName
+            };
         }
 
         [HttpPost("login")]

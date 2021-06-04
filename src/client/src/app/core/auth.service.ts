@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IUser } from 'src/shared/models/user';
@@ -11,7 +11,7 @@ import { IUser } from 'src/shared/models/user';
 })
 export class AuthService {
   baseUrl = environment.apiUrl;
-  private currentUserSubject = new BehaviorSubject<IUser>(<IUser>{});
+  private currentUserSubject = new BehaviorSubject<IUser>(<IUser><unknown>null);
   currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -20,11 +20,11 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  loadCurrentUser(token: string) {
+  loadCurrentUser(token: string): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
 
-    return this.http.get<IUser>(this.baseUrl + 'account', { headers }).pipe(
+    return this.http.get<IUser>(this.baseUrl + '/account', { headers }).pipe(
       map((user: IUser) => {
         if (user) {
           localStorage.setItem('token', user.token);
@@ -35,11 +35,7 @@ export class AuthService {
   }
 
   register(values: any) {
-    return this.http.post(this.baseUrl + '/account/register', values).pipe(
-      map(() => {
-        console.log('Registered returned successfully.');
-      })
-    )
+    return this.http.post(this.baseUrl + '/account/register', values);
   }
 
   login(values: any) {

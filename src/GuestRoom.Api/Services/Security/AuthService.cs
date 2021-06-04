@@ -160,5 +160,10 @@ namespace GuestRoom.Api.Services.Security
 
             return true;
         }
+
+        public async Task<AppUser> FindByEmailAsync(string email)
+        {
+            return await _userManager.FindByEmailAsync(email);
+        }
     }
 }
