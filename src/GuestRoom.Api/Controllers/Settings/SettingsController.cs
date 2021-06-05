@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using GuestRoom.Api.Controllers.Settings.GetRequests;
+﻿using GuestRoom.Api.Controllers.Settings.GetRequests;
 using GuestRoom.Api.Controllers.Settings.UpdateCommands;
 using GuestRoom.Domain.Models.Content;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GuestRoom.Api.Controllers.Settings
 {
@@ -21,11 +21,11 @@ namespace GuestRoom.Api.Controllers.Settings
         }
 
         [HttpGet("contact")]
-        public async Task<ContactModel> GetContact()
+        public async Task<ActionResult<ContactModel>> GetContact()
         {
             var response = await _mediator.Send(new GetContactRequest());
 
-            return response.Contact;
+            return Ok(response.Contact);
         }
 
         [HttpGet("home")]
@@ -53,33 +53,33 @@ namespace GuestRoom.Api.Controllers.Settings
         }
 
         [HttpPut("contact")]
-        public async Task<ActionResult> UpdateContact()
+        public async Task<ActionResult> UpdateContact([FromBody] UpdateContactCommand model)
         {
-            var response = await _mediator.Send(new UpdateContactCommand());
+            var response = await _mediator.Send(model);
 
             return Ok();
         }
 
         [HttpPut("home")]
-        public async Task<ActionResult> UpdateHome()
+        public async Task<ActionResult> UpdateHome([FromBody] UpdateHomeCommand model)
         {
-            var response = await _mediator.Send(new UpdateHomeCommand());
+            var response = await _mediator.Send(model);
 
             return Ok();
         }
 
         [HttpPut("legal")]
-        public async Task<ActionResult> UpdateLegal()
+        public async Task<ActionResult> UpdateLegal([FromBody] UpdateLegalCommand model)
         {
-            var response = await _mediator.Send(new UpdateLegalCommand());
+            var response = await _mediator.Send(model);
 
             return Ok();
         }
 
         [HttpPut("room/{id:int}")]
-        public async Task<ActionResult> UpdateRoom(int id)
+        public async Task<ActionResult> UpdateRoom([FromRoute] int id, [FromBody] RoomModel model)
         {
-            var response = await _mediator.Send(new UpdateRoomCommand(id));
+            var response = await _mediator.Send(new UpdateRoomCommand(id, model));
 
             return Ok();
         }

@@ -1,17 +1,20 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using GuestRoom.Domain.Models.Content;
 using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace GuestRoom.Api.Controllers.Settings.UpdateCommands
 {
     public class UpdateRoomCommand : IRequest<UpdateRoomResponse>
     {
-        public UpdateRoomCommand(int id)
+        public UpdateRoomCommand(int id, RoomModel roomModel)
         {
             Id = id;
+            RoomModel = roomModel;
         }
 
         public int Id { get; }
+        public RoomModel RoomModel { get; }
     }
 
     public class UpdateRoomResponse { }

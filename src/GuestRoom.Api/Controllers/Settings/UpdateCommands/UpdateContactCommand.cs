@@ -1,10 +1,11 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using GuestRoom.Domain.Models.Content;
 using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace GuestRoom.Api.Controllers.Settings.UpdateCommands
 {
-    public class UpdateContactCommand : IRequest<UpdateContactResponse> { }
+    public class UpdateContactCommand : ContactModel, IRequest<UpdateContactResponse> { }
 
     public class UpdateContactResponse { }
 

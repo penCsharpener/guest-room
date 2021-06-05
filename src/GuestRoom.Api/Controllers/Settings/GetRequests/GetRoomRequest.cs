@@ -1,6 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using GuestRoom.Domain.Models.Content;
+using GuestRoom.Domain.Providers;
 using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace GuestRoom.Api.Controllers.Settings.GetRequests
 {
@@ -14,13 +16,27 @@ namespace GuestRoom.Api.Controllers.Settings.GetRequests
         public int Id { get; }
     }
 
-    public class GetRoomResponse { }
+    public class GetRoomResponse
+    {
+        public RoomModel Room { get; set; }
+    }
 
     public class GetRoomRequestHandler : IRequestHandler<GetRoomRequest, GetRoomResponse>
     {
+        private readonly IContentStore _store;
+
+        public GetRoomRequestHandler(IContentStore store)
+        {
+            _store = store;
+        }
+
         public async Task<GetRoomResponse> Handle(GetRoomRequest request, CancellationToken cancellationToken)
         {
-            return new();
+            var response = new GetRoomResponse();
+
+            response.Room = await _store.GetContentAsync<RoomModel>($"room-{request.Id}");
+
+            return response;
         }
     }
 }
