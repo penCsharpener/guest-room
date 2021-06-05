@@ -35,6 +35,7 @@ namespace GuestRoom.Api.Controllers.Settings.GetRequests
             var response = new GetRoomResponse();
 
             response.Room = await _store.GetContentAsync<RoomModel>($"room-{request.Id}");
+            response.Room.Miscellaneous = await _store.GetContentAsync<MiscellaneousModel>("misc");
 
             return response;
         }

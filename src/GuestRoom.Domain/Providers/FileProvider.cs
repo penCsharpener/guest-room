@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace GuestRoom.Domain.Providers
         {
             if (File.Exists(path))
             {
-                return await File.ReadAllTextAsync(path, cancellationToken);
+                return await File.ReadAllTextAsync(path, Encoding.UTF8, cancellationToken);
             }
 
             return "{ }";

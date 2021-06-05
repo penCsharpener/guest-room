@@ -27,6 +27,7 @@ namespace GuestRoom.Api.Controllers.Settings.GetRequests
             var response = new GetLegalResponse();
 
             response.Legal = await _store.GetContentAsync<LegalModel>("legal");
+            response.Legal.Contact = await _store.GetContentAsync<ContactModel>("contact");
 
             return response;
         }

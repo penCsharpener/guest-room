@@ -33,7 +33,7 @@ namespace GuestRoom.Api.Controllers.Settings
         {
             var response = await _mediator.Send(new GetHomeRequest());
 
-            return Ok();
+            return Ok(response.Home);
         }
 
         [HttpGet("legal")]
@@ -41,7 +41,7 @@ namespace GuestRoom.Api.Controllers.Settings
         {
             var response = await _mediator.Send(new GetLegalRequest());
 
-            return Ok();
+            return Ok(response.Legal);
         }
 
         [HttpGet("room/{id:int}")]
@@ -49,7 +49,7 @@ namespace GuestRoom.Api.Controllers.Settings
         {
             var response = await _mediator.Send(new GetRoomRequest(id));
 
-            return Ok();
+            return Ok(response.Room);
         }
 
         [HttpPut("contact")]
