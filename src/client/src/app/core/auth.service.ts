@@ -34,6 +34,12 @@ export class AuthService {
     )
   }
 
+  getToken() {
+    const token = localStorage.getItem('token')
+    console.log("🚀 ~ file: auth.service.ts ~ line 39 ~ AuthService ~ getToken ~ token", token)
+    return token;
+  }
+
   register(values: any) {
     return this.http.post(this.baseUrl + '/account/register', values);
   }

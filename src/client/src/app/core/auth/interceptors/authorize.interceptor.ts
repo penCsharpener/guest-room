@@ -8,13 +8,22 @@ import {
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from '../../auth.service';
 
 @Injectable()
 export class AuthorizeInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    request = request.clone({
+      setHeaders: {
+        'Content-Type' : 'application/json; charset=utf-8',
+        'Accept'       : 'application/json',
+        'Authorization': `Bearer ${this.authService.getToken()}`,
+      },
+    });
+
     return next.handle(request).pipe(
       catchError(res => {
         if (res.status === 403) {
