@@ -1,7 +1,7 @@
 {
-  "title": "",
-  "contentHtml": "",
-  "furnishing": "",
-  "pricing": "",
-  "miscellaneous": ""
+  "title": "Room 2",
+  "contentHtml": "html content",
+  "furnishing": "one persons",
+  "pricing": "40 €",
+  "miscellaneous": "Room with two single beds."
 }

@@ -1,6 +1,6 @@
 {
-  "title": "",
-  "contentHtml": "",
-  "pageTitle": "",
-  "mapsLink": "" 
+  "title": "welcome",
+  "contentHtml": "html content here",
+  "pageTitle": "guest room title",
+  "mapsLink": "https://maps.google.com"
 }

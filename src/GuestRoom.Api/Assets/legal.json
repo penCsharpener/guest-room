@@ -1,15 +1,15 @@
 {
-  "title": "",
-  "contentHtml": "",
+  "title": "legal",
+  "contentHtml": "html content",
   "contact": {
-    "title": "",
+    "title": "Contact",
     "contentHtml": "",
-    "phoneNumber": "",
-    "faxNumber": "",
-    "emailAddress": "",
-    "fullName": "",
-    "streetAndHouseNumber": "",
-    "zipcode": "",
-    "city": ""
+    "phoneNumber": "+49 0176 00000001",
+    "faxNumber": "+49 555 55555555",
+    "emailAddress": "john.doe@email.com",
+    "fullName": "John Doe",
+    "streetAndHouseNumber": "Main-Street 42",
+    "zipcode": "01234",
+    "city": "Metropolis"
   } 
 }
