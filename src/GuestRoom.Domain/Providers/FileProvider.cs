@@ -27,10 +27,7 @@ namespace GuestRoom.Domain.Providers
         {
             var path = Path.Combine(pathParts);
 
-            if (File.Exists(path))
-            {
-                await File.WriteAllTextAsync(content, path);
-            }
+            await File.WriteAllTextAsync(path, content);
         }
 
         public async Task<byte[]> ReadAllBytesAsync(string path, CancellationToken cancellationToken = default)

@@ -9,23 +9,24 @@ import { ContactModel, HomeModel, LegalModel, RoomModel } from './settings.model
 })
 export class SettingsService {
   baseUrl = `${environment.apiUrl}/settings/`;
+  assetUrl = 'assets/site-content/'
 
   constructor(private http: HttpClient) { }
 
   getContact() : Observable<ContactModel> {
-    return this.http.get<ContactModel>(this.baseUrl + 'contact');
+    return this.http.get<ContactModel>(this.assetUrl + 'contact.json');
   }
 
   getHome() : Observable<HomeModel> {
-    return this.http.get<HomeModel>(this.baseUrl + 'home');
+    return this.http.get<HomeModel>('assets/site-content/home.json');
   }
 
   getLegal() : Observable<LegalModel> {
-    return this.http.get<LegalModel>(this.baseUrl + 'legal');
+    return this.http.get<LegalModel>(this.assetUrl + 'legal.json');
   }
 
   getRoom(roomId: number) : Observable<RoomModel> {
-    return this.http.get<RoomModel>(this.baseUrl + 'room/' + roomId);
+    return this.http.get<RoomModel>(`${this.assetUrl}room-${roomId}.json`);
   }
 
   updateContact(model: ContactModel) : Observable<any> {

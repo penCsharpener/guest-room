@@ -5,6 +5,7 @@ using GuestRoom.Domain;
 using GuestRoom.Domain.Models;
 using GuestRoom.Domain.Providers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using NETCore.MailKit.Extensions;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
@@ -126,6 +128,14 @@ namespace GuestRoom.Api.Extensions
                 ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero
             };
+        }
+
+        internal static string GetAssetPath(this IWebHostEnvironment env, params string[] paths)
+        {
+            var pathArray = new List<string>() { $"{env.WebRootPath}\\assets" };
+            pathArray.AddRange(paths);
+
+            return System.IO.Path.Combine(pathArray.ToArray());
         }
 
         internal static bool IsRelease()

@@ -1,8 +1,8 @@
 <mat-toolbar>
-  <a routerLink="/">Guest room</a>
+  <a routerLink="/">{{ model.pageTitle }}</a>
   <span fxFlex></span>
   <ul fxLayout="row" fxLayoutGap="15px">
-    <li><a routerLink="/main/room/1">Room 1</a></li>
-    <li><a routerLink="/main/room/2">Room 2</a></li>
+    <li><a routerLink="/main/room/1">{{ model.roomOneLink }}</a></li>
+    <li><a routerLink="/main/room/2">{{ model.roomTwoLink }}</a></li>
   </ul>
 </mat-toolbar>

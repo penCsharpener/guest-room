@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeModel } from '../../settings/settings.models';
+import { SettingsService } from '../../settings/settings.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  homeModel = <HomeModel><unknown>null;
 
-  constructor() { }
+  constructor(private settingsService: SettingsService) { }
 
   ngOnInit(): void {
+    this.settingsService.getHome().subscribe(result => this.homeModel = result);
+    console.log("🚀 ~ file: home.component.ts ~ line 17 ~ HomeComponent ~ ngOnInit ~ this.homeModel", this.homeModel)
   }
 
 }

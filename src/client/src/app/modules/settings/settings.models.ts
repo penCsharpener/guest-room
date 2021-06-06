@@ -16,7 +16,10 @@ export class ContactModel extends ContentBaseModel {
 
 export class HomeModel extends ContentBaseModel {
     pageTitle: string = '';
+    welcomeParagraph: string = '';
     mapsLink: string = '';
+    roomOneLink: string = '';
+    roomTwoLink: string = '';
 }
 
 export class LegalModel extends ContentBaseModel {

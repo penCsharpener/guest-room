@@ -1,6 +1,6 @@
 {
   "title": "Contact",
-  "contentHtml": "",
+  "contentHtml": "html content <br>",
   "phoneNumber": "+49 0176 00000001",
   "faxNumber": "+49 555 55555555",
   "emailAddress": "john.doe@email.com",
