@@ -21,21 +21,19 @@ namespace GuestRoom.Api.Controllers.Settings.Upload.Requests
         private readonly IFileProvider _fileProvider;
         private readonly IWebHostEnvironment _env;
         private readonly ILogger<UploadFileRequestHandler> _logger;
-        private readonly string _basePath;
 
         public UploadFileRequestHandler(IFileProvider fileProvider, IWebHostEnvironment env, ILogger<UploadFileRequestHandler> logger)
         {
             _fileProvider = fileProvider;
             _env = env;
             _logger = logger;
-            _basePath = _env.WebRootPath;
         }
 
         public async Task<UploadFileResponse> Handle(UploadFileRequest request, CancellationToken cancellationToken)
         {
             var response = new UploadFileResponse();
 
-            await _fileProvider.WriteAllBytesAsync(request.FileContent, _basePath, $"assets\\{request.ImageName}");
+            await _fileProvider.WriteAllBytesAsync(request.FileContent, _env.WebRootPath, $"assets\\site-content\\{request.ImageName}");
 
             return response;
         }
