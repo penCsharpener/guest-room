@@ -15,5 +15,7 @@ namespace GuestRoom.Domain
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
+
+        public DbSet<Image> Images { get; set; }
     }
 }

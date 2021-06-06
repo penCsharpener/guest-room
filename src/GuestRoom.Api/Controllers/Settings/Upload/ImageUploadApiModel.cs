@@ -1,6 +1,6 @@
-﻿using System.IO;
-using GuestRoom.Domain.Validation;
+﻿using GuestRoom.Domain.Validation;
 using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace GuestRoom.Api.Controllers.Settings.Upload
 {
@@ -12,6 +12,8 @@ namespace GuestRoom.Api.Controllers.Settings.Upload
 
         [ValidateFileType("png,jpg,jpeg,webp,bmp")]
         public IFormFile File { get; set; }
+        public string Description { get; set; }
+        public string Location { get; set; }
 
         internal byte[] ToRawFile()
         {

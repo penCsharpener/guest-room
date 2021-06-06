@@ -1,7 +1,7 @@
 ﻿using GuestRoom.Domain.Providers;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,21 +19,23 @@ namespace GuestRoom.Api.Controllers.Settings.Upload.Requests
     public class UploadFileRequestHandler : IRequestHandler<UploadFileRequest, UploadFileResponse>
     {
         private readonly IFileProvider _fileProvider;
+        private readonly IWebHostEnvironment _env;
         private readonly ILogger<UploadFileRequestHandler> _logger;
         private readonly string _basePath;
 
-        public UploadFileRequestHandler(IFileProvider fileProvider, ILogger<UploadFileRequestHandler> logger)
+        public UploadFileRequestHandler(IFileProvider fileProvider, IWebHostEnvironment env, ILogger<UploadFileRequestHandler> logger)
         {
             _fileProvider = fileProvider;
+            _env = env;
             _logger = logger;
-            _basePath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+            _basePath = _env.WebRootPath;
         }
 
         public async Task<UploadFileResponse> Handle(UploadFileRequest request, CancellationToken cancellationToken)
         {
             var response = new UploadFileResponse();
 
-            await _fileProvider.WriteAllBytesAsync(request.FileContent, _basePath, $"Assets\\Images\\{request.ImageName}");
+            await _fileProvider.WriteAllBytesAsync(request.FileContent, _basePath, $"assets\\{request.ImageName}");
 
             return response;
         }

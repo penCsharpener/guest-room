@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IUser } from 'src/shared/models/user';
@@ -11,16 +11,17 @@ import { IUser } from 'src/shared/models/user';
 })
 export class AuthService {
   baseUrl = environment.apiUrl;
-  private currentUserSubject = new BehaviorSubject<IUser>(<IUser><unknown>null);
+  private currentUserSubject = new ReplaySubject<IUser>(1);
   currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getCurrentUserValue() {
-    return this.currentUserSubject.value;
-  }
-
   loadCurrentUser(token: string): Observable<any> {
+    if (token === null) {
+      this.currentUserSubject.next(<IUser><unknown>null);
+      return of();
+    }
+
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
 
@@ -36,7 +37,6 @@ export class AuthService {
 
   getToken() {
     const token = localStorage.getItem('token')
-    console.log("🚀 ~ file: auth.service.ts ~ line 39 ~ AuthService ~ getToken ~ token", token)
     return token;
   }
 

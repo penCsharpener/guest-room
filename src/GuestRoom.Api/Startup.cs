@@ -32,6 +32,8 @@ namespace GuestRoom.Api
             services.AddGuestRoomServices(appsettings);
             services.AddMediatR(GetType().Assembly);
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "GuestRoom.Api", Version = "v1" }); });
+            services.AddSpaStaticFiles(configuration => configuration.RootPath = "../client/dist/client");
+
             services.AddCors(opt =>
             {
                 opt.AddPolicy(CorsPolicy, policy =>
@@ -56,16 +58,31 @@ namespace GuestRoom.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GuestRoom.Api v1"));
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseCors(CorsPolicy);
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "../client";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                }
+            });
         }
     }
 }
