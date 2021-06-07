@@ -18,7 +18,7 @@ export class SettingsService {
   }
 
   getHome() : Observable<HomeModel> {
-    return this.http.get<HomeModel>('assets/site-content/home.json');
+    return this.http.get<HomeModel>(this.assetUrl + 'home.json');
   }
 
   getLegal() : Observable<LegalModel> {
