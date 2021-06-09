@@ -80,7 +80,7 @@ namespace GuestRoom.Api
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    spa.UseProxyToSpaDevelopmentServer("https://localhost:5001");
                 }
             });
         }

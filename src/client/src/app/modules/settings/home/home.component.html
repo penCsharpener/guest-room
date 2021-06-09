@@ -1,32 +1,32 @@
 <form novalidate [formGroup]="editForm">
     <div fxLayout="column">
         <mat-form-field>
-            <mat-label>Titel</mat-label>
+            <mat-label>{{ 'settings.title' | translate }}</mat-label>
             <input matInput formControlName="title">
-            <mat-error *ngIf="editForm.get('title')?.hasError('required')">Required value.</mat-error>
+            <mat-error *ngIf="editForm.get('title')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Content HTML</mat-label>
+            <mat-label>{{ 'settings.contentHtml' | translate }}</mat-label>
             <input matInput formControlName="contentHtml">
-            <mat-error *ngIf="editForm.get('contentHtml')?.hasError('required')">Required value.</mat-error>
+            <mat-error *ngIf="editForm.get('contentHtml')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Page title</mat-label>
+            <mat-label>{{ 'settings.pageTitle' | translate }}</mat-label>
             <input matInput formControlName="pageTitle">
-            <mat-error *ngIf="editForm.get('pageTitle')?.hasError('required')">Required value.</mat-error>
+            <mat-error *ngIf="editForm.get('pageTitle')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Welcome Paragraph</mat-label>
+            <mat-label>{{ 'settings.welcomeParagraph' | translate }}</mat-label>
             <textarea matInput formControlName="welcomeParagraph"></textarea>
-            <mat-error *ngIf="editForm.get('welcomeParagraph')?.hasError('required')">Required value.</mat-error>
+            <mat-error *ngIf="editForm.get('welcomeParagraph')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Maps Link</mat-label>
+            <mat-label>{{ 'settings.mapsLink' | translate }}</mat-label>
             <input matInput formControlName="mapsLink">
-            <mat-error *ngIf="editForm.get('mapsLink')?.hasError('required')">Required value.</mat-error>
+            <mat-error *ngIf="editForm.get('mapsLink')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
         </mat-form-field>
     </div>
     <div fxLayout="column">
-        <button mat-raised-button color="accent" [disabled]="!(editForm.valid && editForm.dirty)" (click)="saveModel()">Save</button>
+        <button mat-raised-button color="accent" [disabled]="!(editForm.valid && editForm.dirty)" (click)="saveModel()">{{ 'common.save' | translate }}</button>
     </div>
 </form>

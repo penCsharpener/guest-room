@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '../../../shared/modules/material.module';
+import { MaterialModule } from '../../shared/modules/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EmailVerifyComponent } from './email/verify/email-verify.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, EmailVerifyComponent, ResetPasswordComponent, ForgotPasswordComponent],
@@ -15,7 +16,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    SharedModule
   ]
 })
 export class AccountModule { }

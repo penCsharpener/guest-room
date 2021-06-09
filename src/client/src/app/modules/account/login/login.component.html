@@ -5,15 +5,15 @@
         <div fxLayout="column" fxLayoutGap="20px" fxLayoutGap.xs="20px" fxLayoutAlign="start center">
           <div fxLayout="column" fxLayoutAlign="start center" class="input-row">
             <mat-form-field appearance="outline">
-              <mat-label>Email</mat-label>
+              <mat-label>{{ 'account.email' | translate }}</mat-label>
               <input matInput placeholder="E-Mail" formControlName="email" autofocus>
-              <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Required value.</mat-error>
-              <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Email is not in a valid format.</mat-error>
+              <mat-error *ngIf="loginForm.get('email')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+              <mat-error *ngIf="loginForm.get('email')?.hasError('email')">{{ 'errors.emailInvalid' | translate }}</mat-error>
             </mat-form-field>
           </div>
           <div fxLayout="column" fxLayoutAlign="start center" class="input-row">
             <mat-form-field>
-              <mat-label>Password</mat-label>
+              <mat-label>{{ 'account.password' | translate }}</mat-label>
               <input matInput placeholder="Password" formControlName="password" type="password" maxlength="10" (keyup.enter)="login()">
             </mat-form-field>
           </div>
@@ -24,11 +24,11 @@
       <a mat-button (click)="forgotPassword()">Forgot password?</a>
       <span fxFlex></span>
       <button mat-raised-button [disabled]="loginForm.invalid" (click)="login()">
-        Login
+        {{ 'account.login' | translate }}
       </button>
     </mat-card-actions>
     <mat-card-actions>
-      <mat-error *ngIf="isLoginFailure === true">Login failed.</mat-error>
+      <mat-error *ngIf="isLoginFailure === true">{{ 'errors.loginFailed' | translate }}</mat-error>
     </mat-card-actions>
   </mat-card>
 </div>

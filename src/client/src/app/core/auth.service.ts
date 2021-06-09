@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { IUser } from 'src/shared/models/user';
+import { IUser } from 'src/app/shared/models/user';
 
 @Injectable({
   providedIn: 'root'

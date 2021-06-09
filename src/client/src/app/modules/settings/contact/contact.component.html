@@ -1,52 +1,52 @@
 <form novalidate [formGroup]="editForm">
   <div fxLayout="column">
     <mat-form-field>
-        <mat-label>Titel</mat-label>
+        <mat-label>{{ 'settings.title' | translate }}</mat-label>
         <input matInput formControlName="title">
-        <mat-error *ngIf="editForm.get('title')?.hasError('required')">Required value.</mat-error>
+        <mat-error *ngIf="editForm.get('title')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Content HTML</mat-label>
+        <mat-label>{{ 'settings.contentHtml' | translate }}</mat-label>
         <input matInput formControlName="contentHtml">
-        <mat-error *ngIf="editForm.get('contentHtml')?.hasError('required')">Required value.</mat-error>
+        <mat-error *ngIf="editForm.get('contentHtml')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Phone Number</mat-label>
+        <mat-label>{{ 'settings.phoneNumber' | translate }}</mat-label>
         <input matInput formControlName="phoneNumber">
-        <mat-error *ngIf="editForm.get('phoneNumber')?.hasError('required')">Required value.</mat-error>
+        <mat-error *ngIf="editForm.get('phoneNumber')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Fax Number</mat-label>
+        <mat-label>{{ 'settings.faxNumber' | translate }}</mat-label>
         <input matInput formControlName="faxNumber">
-        <mat-error *ngIf="editForm.get('faxNumber')?.hasError('required')">Required value.</mat-error>
+        <mat-error *ngIf="editForm.get('faxNumber')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Email Address</mat-label>
+        <mat-label>{{ 'settings.emailAddress' | translate }}</mat-label>
         <input matInput formControlName="emailAddress">
-        <mat-error *ngIf="editForm.get('emailAddress')?.hasError('required')">Required value.</mat-error>
+        <mat-error *ngIf="editForm.get('emailAddress')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Full Name</mat-label>
+        <mat-label>{{ 'settings.fullName' | translate }}</mat-label>
         <input matInput formControlName="fullName">
-        <mat-error *ngIf="editForm.get('fullName')?.hasError('required')">Required value.</mat-error>
+        <mat-error *ngIf="editForm.get('fullName')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Street</mat-label>
+        <mat-label>{{ 'settings.street' | translate }}</mat-label>
         <input matInput formControlName="streetAndHouseNumber">
-        <mat-error *ngIf="editForm.get('streetAndHouseNumber')?.hasError('required')">Required value.</mat-error>
+        <mat-error *ngIf="editForm.get('streetAndHouseNumber')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Zipcode</mat-label>
+        <mat-label>{{ 'settings.zipcode' | translate }}</mat-label>
         <input matInput formControlName="zipCode">
-        <mat-error *ngIf="editForm.get('zipCode')?.hasError('required')">Required value.</mat-error>
+        <mat-error *ngIf="editForm.get('zipCode')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>City</mat-label>
+        <mat-label>{{ 'settings.city' | translate }}</mat-label>
         <input matInput formControlName="city">
-        <mat-error *ngIf="editForm.get('city')?.hasError('required')">Required value.</mat-error>
+        <mat-error *ngIf="editForm.get('city')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
     </mat-form-field>
   </div>
   <div fxLayout="column">
-    <button mat-raised-button color="accent" [disabled]="!(editForm.valid && editForm.dirty)" (click)="saveModel()">Save</button>
+    <button mat-raised-button color="accent" [disabled]="!(editForm.valid && editForm.dirty)" (click)="saveModel()">{{ 'common.save' | translate }}</button>
   </div>
 </form>

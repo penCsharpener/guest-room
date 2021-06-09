@@ -1,0 +1,60 @@
+{
+    "layout": {
+        "header": {
+            "siteTitle": "Gästezimmer"
+        },
+        "footer": {
+            "login": "Anmelden",
+            "logout": "Abmelden",
+            "welcome": "Willkommen"
+        },
+        "links": {
+            "roomOneLink": "Zimmer 1",
+            "roomTwoLink": "Zimmer 2",
+            "contactLink": "Kontakt",
+            "legalLink": "Impressum",
+            "homeLink": "Home",
+            "imagesLink": "Bilder"
+        }
+    },
+    "home": {
+        "siteTitle": "Gästezimmer",
+        "pageTitle": "Gästezimmer"
+    },
+    "errors": {
+        "requiredValue": "Pflichtfeld",
+        "emailInvalid": "E-Mail ist nicht in einem gültigen Format.",
+        "loginFailed": "Anmelden fehlgeschlagen"
+    },
+    "account": {
+        "email": "Email",
+        "login": "Anmelden",
+        "logout": "Abmelden",
+        "username": "Nutzername",
+        "password": "Passwort",
+        "register": "Registrieren",
+        "passwordConfirm": "Passwort bestätigen",
+        "resetRassword": "Passwort zurücksetzen",
+        "resetRasswordSuccessful": "Passwort wurde erfolgreich zurückgesetzt.",
+        "resetRasswordFailed": "Passwort zurücksetzen fehlgeschlagen.",
+        "registrationSubmitted": "Wenn Ihre Email im System gefunden wurde, werden Sie gleich eine Email mit dem Link erhalten, um Ihr Passwort zurückzusetzen.",
+        "submit": "Registrieren"
+    },
+    "settings": {
+        "title": "Titel",
+        "contentHtml": "HTML-Inhalt",
+        "phoneNumber": "Telefonnummer",
+        "faxNumber": "Fax-Nummer",
+        "emailAddress": "E-Mail Adresse",
+        "fullName": "Voller Name",
+        "street": "Straße",
+        "zipcode": "Postleitzahl",
+        "city": "Stadt",
+        "pageTitle": "Seitentitel",
+        "welcomeParagraph": "Willkommen Absatz",
+        "mapsLink": "Karten Link"
+    },
+    "common": {
+        "save": "Speichern"
+    }
+}

@@ -5,33 +5,25 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
-import { HomeComponent } from './modules/main/home/home.component';
-import { RoomComponent } from './modules/main/room/room.component';
-import { LegalComponent } from './modules/main/legal/legal.component';
-import { ContactComponent } from './modules/main/contact/contact.component';
 import { AccountModule } from './modules/account/account.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { SettingsModule } from './modules/settings/settings.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthorizeInterceptor } from './core/auth/interceptors/authorize.interceptor';
+import { MainModule } from './modules/main/main.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    RoomComponent,
-    LegalComponent,
-    ContactComponent,
+    AppComponent
   ],
   imports: [
+    AccountModule,
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
-    LayoutModule,
     HttpClientModule,
-    AppRoutingModule,
+    LayoutModule,
+    MainModule,
     SettingsModule,
-    AccountModule
   ],
   providers: [
     {

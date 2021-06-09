@@ -5,30 +5,30 @@
                 <div fxLayout="column" fxLayoutGap="20px" fxLayoutGap.xs="20px" fxLayoutAlign="start center">
                     <div fxLayout="column" fxLayoutAlign="start center" class="input-row">
                         <mat-form-field appearance="outline">
-                            <mat-label>Username</mat-label>
+                            <mat-label>{{ 'account.username' | translate }}</mat-label>
                             <input matInput placeholder="Username" formControlName="displayName" autofocus>
-                            <mat-error *ngIf="registerForm.get('displayName')?.hasError('required')">Required value.
+                            <mat-error *ngIf="registerForm.get('displayName')?.hasError('required')">{{ 'errors.requiredValue' | translate }}
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div fxLayout="column" fxLayoutAlign="start center" class="input-row">
                         <mat-form-field appearance="outline">
-                            <mat-label>Email</mat-label>
+                            <mat-label>{{ 'account.email' | translate }}</mat-label>
                             <input matInput placeholder="E-Mail" formControlName="email" autofocus>
-                            <mat-error *ngIf="registerForm.get('email')?.hasError('required')">Required value.
+                            <mat-error *ngIf="registerForm.get('email')?.hasError('required')">{{ 'errors.requiredValue' | translate }}
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div fxLayout="column" fxLayoutAlign="start center" class="input-row">
                         <mat-form-field>
-                            <mat-label>Password</mat-label>
+                            <mat-label>{{ 'account.password' | translate }}</mat-label>
                             <input matInput placeholder="Password" formControlName="password" type="password"
                                 maxlength="10">
                         </mat-form-field>
                     </div>
                     <div fxLayout="column" fxLayoutAlign="start center" class="input-row">
                         <mat-form-field>
-                            <mat-label>Password Confirm</mat-label>
+                            <mat-label>{{ 'account.passwordConfirm' | translate }}</mat-label>
                             <input matInput placeholder="PasswordConfirm" formControlName="passwordConfirm"
                                 type="password" maxlength="10" (keyup.enter)="register()">
                         </mat-form-field>
@@ -39,7 +39,7 @@
         <mat-card-actions>
             <span fxFlex></span>
             <button mat-raised-button (click)="register()">
-                Register
+                {{ 'account.register' | translate }}
             </button>
         </mat-card-actions>
     </mat-card>

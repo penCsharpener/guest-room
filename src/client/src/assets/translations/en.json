@@ -1,0 +1,60 @@
+{
+    "layout": {
+        "header": {
+            "siteTitle": "Guest Room"
+        },
+        "footer": {
+            "login": "Login",
+            "logout": "Logout",
+            "welcome": "Welcome"
+        },
+        "links": {
+            "contactLink": "Contact",
+            "legalLink": "Legal",
+            "homeLink": "Home",
+            "imagesLink": "Images",
+            "roomOneLink": "Room 1",
+            "roomTwoLink": "Room 2"
+        }
+    },
+    "home": {
+        "siteTitle": "Guest Room",
+        "pageTitle": "Guest Room"
+    },
+    "errors": {
+        "requiredValue": "Required value.",
+        "emailInvalid": "Email is not in a valid format.",
+        "loginFailed": "Login failed"
+    },
+    "account": {
+        "email": "Email",
+        "login": "Login",
+        "logout": "Logout",
+        "username": "Username",
+        "password": "Password",
+        "register": "Register",
+        "passwordConfirm": "Password confirm",
+        "resetRassword": "Reset password",
+        "resetRasswordSuccessful": "Password was successfully reset.",
+        "resetRasswordFailed": "Password could not be reset.",
+        "registrationSubmitted": "If your email is registered in the system you will receive an email with a password reset link.",
+        "submit": "Submit"
+    },
+    "settings": {
+        "title": "Title",
+        "contentHtml": "Content HTML",
+        "phoneNumber": "Phone Number",
+        "faxNumber": "Fax Number",
+        "emailAddress": "Email Address",
+        "fullName": "Full Name",
+        "street": "Street",
+        "zipcode": "Zipcode",
+        "city": "City",
+        "pageTitle": "Page title",
+        "welcomeParagraph": "Welcome paragraph",
+        "mapsLink": "Maps Link"
+    },
+    "common": {
+        "save": "Save"
+    }
+}

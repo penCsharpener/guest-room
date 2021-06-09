@@ -1,25 +1,25 @@
 <footer class="footer" fxLayout="start center" fxLayoutGap="20px">
-  <a class="push-down" routerLink="/main/contact">Contact</a>
-  <a class="push-down" routerLink="/main/legal">Legal</a>
+  <a class="push-down" routerLink="/main/contact">{{ 'layout.links.contactLink' | translate }}</a>
+  <a class="push-down" routerLink="/main/legal">{{ 'layout.links.legalLink' | translate }}</a>
   <ng-container fxFlex *ngIf="currentUser$ | async">
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>settings</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/settings/contact">Contact</button>
-      <button mat-menu-item routerLink="/settings/legal">Legal</button>
-      <button mat-menu-item routerLink="/settings/home">Home</button>
-      <button mat-menu-item routerLink="/settings/images">Images</button>
-      <button mat-menu-item routerLink="/settings/room/1">Room 1</button>
-      <button mat-menu-item routerLink="/settings/room/2">Room 2</button>
+      <button mat-menu-item routerLink="/settings/contact">{{ 'layout.links.contactLink' | translate }}</button>
+      <button mat-menu-item routerLink="/settings/legal">{{ 'layout.links.legalLink' | translate }}</button>
+      <button mat-menu-item routerLink="/settings/home">{{ 'layout.links.homeLink' | translate }}</button>
+      <button mat-menu-item routerLink="/settings/images">{{ 'layout.links.imagesLink' | translate }}</button>
+      <button mat-menu-item routerLink="/settings/room/1">{{ 'layout.links.roomOneLink' | translate }}</button>
+      <button mat-menu-item routerLink="/settings/room/2">{{ 'layout.links.roomTwoLink' | translate }}</button>
     </mat-menu>
     <span fxFlex></span>
-    <a class="push-down">Welcome {{(currentUser$ | async)?.displayName}}</a>
-    <a class="push-down" (click)="logout()">Logout</a>
+    <a class="push-down">{{ 'layout.footer.welcome' | translate }} {{(currentUser$ | async)?.displayName}}</a>
+    <a class="push-down" (click)="logout()">{{ 'layout.footer.logout' | translate }}</a>
   </ng-container>
 
   <ng-container *ngIf="(currentUser$ | async) === null">
     <span fxFlex></span>
-    <a class="push-down" routerLink="/account/login">Login</a>
+    <a class="push-down" routerLink="/account/login">{{ 'layout.footer.login' | translate }}</a>
   </ng-container>
 </footer>

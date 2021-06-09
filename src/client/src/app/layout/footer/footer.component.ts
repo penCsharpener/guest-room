@@ -1,7 +1,7 @@
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
-import { IUser } from 'src/shared/models/user';
+import { IUser } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-footer',

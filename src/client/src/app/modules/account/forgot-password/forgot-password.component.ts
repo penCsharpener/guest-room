@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../../../core/auth.service';
 
 @Component({
@@ -12,7 +11,7 @@ export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm: FormGroup;
   hasSubmitted = false;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { 
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { 
     this.forgotPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
     });
@@ -27,5 +26,9 @@ export class ForgotPasswordComponent implements OnInit {
       console.log(error);
     });
     this.hasSubmitted = true;
+  }
+
+  public registrationSuccessful(text: string): string {
+    return text.replace('{0}', this.forgotPasswordForm.value.email);
   }
 }
