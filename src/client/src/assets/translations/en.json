@@ -35,6 +35,7 @@
         "register": "Register",
         "passwordConfirm": "Password confirm",
         "resetRassword": "Reset password",
+        "forgotPassword": "Forgot password?",
         "resetRasswordSuccessful": "Password was successfully reset.",
         "resetRasswordFailed": "Password could not be reset.",
         "registrationSubmitted": "If your email is registered in the system you will receive an email with a password reset link.",
@@ -52,7 +53,8 @@
         "city": "City",
         "pageTitle": "Page title",
         "welcomeParagraph": "Welcome paragraph",
-        "mapsLink": "Maps Link"
+        "mapsLink": "Maps Link",
+        "exclusionOfLiability": "Exclusion of Liability"
     },
     "common": {
         "save": "Save"

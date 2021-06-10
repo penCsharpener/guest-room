@@ -4,7 +4,7 @@ namespace GuestRoom.Domain.Providers
 {
     public class JsonConverter : IJsonConverter
     {
-        internal static JsonSerializerOptions _options = new() { AllowTrailingCommas = true, PropertyNameCaseInsensitive = true, WriteIndented = true };
+        internal static JsonSerializerOptions _options = new() { AllowTrailingCommas = true, PropertyNameCaseInsensitive = false, PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true };
 
         public T FromJsonAsync<T>(string jsonText)
         {

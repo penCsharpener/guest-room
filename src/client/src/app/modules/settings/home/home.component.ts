@@ -18,9 +18,7 @@ export class HomeComponent implements OnInit {
       contentHtml: ['', Validators.required],
       pageTitle: ['', Validators.required],
       welcomeParagraph: ['', Validators.required],
-      mapsLink: ['', Validators.required],
-      roomOneLink: ['', Validators.required],
-      roomTwoLink: ['', Validators.required],
+      mapsLink: ['', Validators.required]
     });
   }
 
@@ -40,11 +38,9 @@ export class HomeComponent implements OnInit {
     return {
       title: formValue.title,
       contentHtml: formValue.contentHtml,
-      pageTitle: formValue.phoneNumber,
-      welcomeParagraph: formValue.faxNumber,
-      mapsLink: formValue.emailAddress,
-      roomOneLink: formValue.fullName,
-      roomTwoLink: formValue.streetAndHouseNumber
+      pageTitle: formValue.pageTitle,
+      welcomeParagraph: formValue.welcomeParagraph,
+      mapsLink: formValue.mapsLink
     } as HomeModel;
   }
 }

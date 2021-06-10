@@ -35,6 +35,7 @@
         "register": "Registrieren",
         "passwordConfirm": "Passwort bestätigen",
         "resetRassword": "Passwort zurücksetzen",
+        "forgotPassword": "Passwort vergessen?",
         "resetRasswordSuccessful": "Passwort wurde erfolgreich zurückgesetzt.",
         "resetRasswordFailed": "Passwort zurücksetzen fehlgeschlagen.",
         "registrationSubmitted": "Wenn Ihre Email im System gefunden wurde, werden Sie gleich eine Email mit dem Link erhalten, um Ihr Passwort zurückzusetzen.",
@@ -52,7 +53,8 @@
         "city": "Stadt",
         "pageTitle": "Seitentitel",
         "welcomeParagraph": "Willkommen Absatz",
-        "mapsLink": "Karten Link"
+        "mapsLink": "Karten Link",
+        "exclusionOfLiability": "Haftungsausschluss"
     },
     "common": {
         "save": "Speichern"

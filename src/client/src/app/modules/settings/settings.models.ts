@@ -23,7 +23,19 @@ export class HomeModel extends ContentBaseModel {
 }
 
 export class LegalModel extends ContentBaseModel {
-    contact: string = '';
+    contact = {} as ContactModel;
+    legalParagraphs = [] as LegalParagraphModel[];
+    legalRequirements = {} as LegalRequirements;
+}
+
+export class LegalParagraphModel {
+    heading = '';
+    text = '';
+}
+
+export class LegalRequirements {
+    heading = '';
+    lines = [] as string[];
 }
 
 export class LiabilityModel extends ContentBaseModel {

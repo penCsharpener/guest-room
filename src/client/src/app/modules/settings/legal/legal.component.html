@@ -1,1 +1,42 @@
-<p>settings legal works!</p>
+<form novalidate [formGroup]="editForm">
+    <div fxLayout="column">
+        <mat-form-field>
+            <mat-label>{{ 'settings.title' | translate }}</mat-label>
+            <input matInput formControlName="title">
+            <mat-error *ngIf="editForm.get('title')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>{{ 'settings.contentHtml' | translate }}</mat-label>
+            <input matInput formControlName="contentHtml">
+            <mat-error *ngIf="editForm.get('contentHtml')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+        </mat-form-field>
+        <div formArrayName="legalParagraphs">
+            <div fxLayout="column" formGroupName="i" *ngFor="let paragraph of legalParagraphs.controls; let i = index">
+                <mat-form-field>
+                    <mat-label>{{ 'settings.heading' | translate }} {{ i + 1 }}</mat-label>
+                    <input matInput formControlName="heading">
+                    <mat-error *ngIf="editForm.get('heading')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{ 'settings.text' | translate }} {{ i + 1 }}</mat-label>
+                    <input matInput formControlName="text">
+                    <mat-error *ngIf="editForm.get('text')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <button mat-flat-button (click)="addLegalParagraph()">{{ 'settings.legal.addParagraph' | translate }}</button>
+        <div formArrayName="legalLines">
+            <div fxLayout="column" formGroupName="i" *ngFor="let line of legalLines.controls; let i = index">
+                <mat-form-field>
+                    <mat-label>{{ 'settings.lines' | translate }} {{ i + 1 }}</mat-label>
+                    <input matInput formControlName="lines">
+                    <mat-error *ngIf="editForm.get('lines')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <button mat-flat-button (click)="addLine()">{{ 'settings.legal.addLine' | translate }}</button>
+    </div>
+    <div fxLayout="column">
+        <button mat-raised-button color="accent" [disabled]="!(editForm.valid && editForm.dirty)" (click)="saveModel()">{{ 'common.save' | translate }}</button>
+    </div>
+</form>

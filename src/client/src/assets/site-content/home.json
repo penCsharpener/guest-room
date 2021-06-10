@@ -2,7 +2,5 @@
   "title": "Welcome to guest room at Template Town",
   "contentHtml": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita cupiditate fuga vero minima amet nemo nesciunt quaerat ad dolorem consequuntur, atque ut et commodi quos, excepturi porro neque odit repellat.</p>",
   "pageTitle": "guest room title",
-  "mapsLink": "https://maps.google.com",
-  "roomOneLink": "Room 1",
-  "roomTwoLink": "Room 2"
+  "mapsLink": "https://maps.google.com"
 }
