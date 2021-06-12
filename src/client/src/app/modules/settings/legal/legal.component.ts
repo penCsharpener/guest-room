@@ -9,8 +9,8 @@ import { SettingsService } from '../settings.service';
   styleUrls: ['./legal.component.scss']
 })
 export class LegalComponent implements OnInit {
-  model: LegalModel = <LegalModel>{};
-  editForm: FormGroup = <FormGroup>{};
+  model: LegalModel = {} as LegalModel;
+  editForm: FormGroup = {} as FormGroup;
 
   get legalParagraphs(): FormArray {
     return this.editForm.get('legalParagraphs') as FormArray;
@@ -20,7 +20,7 @@ export class LegalComponent implements OnInit {
     return this.editForm.get('legalRequirements.lines') as FormArray;
   }
 
-  constructor(private fb: FormBuilder, private settingsService: SettingsService) { 
+  constructor(private fb: FormBuilder, private settingsService: SettingsService) {
     this.editForm = this.fb.group({
       title: ['', Validators.required],
       contentHtml: ['', Validators.required],
@@ -40,7 +40,6 @@ export class LegalComponent implements OnInit {
 
   saveModel(): void {
     const legal = this.createModel();
-    console.log("🚀 ~ file: legal.component.ts ~ line 39 ~ LegalComponent ~ saveModel ~ legal", legal)
     this.settingsService.updateLegal(legal).subscribe();
   }
 

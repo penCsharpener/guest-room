@@ -1,7 +1,7 @@
 <footer class="footer" fxLayout="start center" fxLayoutGap="20px">
   <a class="push-down" routerLink="/main/contact">{{ 'layout.links.contactLink' | translate }}</a>
   <a class="push-down" routerLink="/main/legal">{{ 'layout.links.legalLink' | translate }}</a>
-  <ng-container fxFlex *ngIf="currentUser$ | async">
+  <ng-container *ngIf="currentUser$ | async as currentUser">
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>settings</mat-icon>
     </button>
@@ -14,10 +14,9 @@
       <button mat-menu-item routerLink="/settings/room/2">{{ 'layout.links.roomTwoLink' | translate }}</button>
     </mat-menu>
     <span fxFlex></span>
-    <a class="push-down">{{ 'layout.footer.welcome' | translate }} {{(currentUser$ | async)?.displayName}}</a>
+    <a class="push-down">{{ 'layout.footer.welcome' | translate }} {{ currentUser.displayName }}</a>
     <a class="push-down" (click)="logout()">{{ 'layout.footer.logout' | translate }}</a>
   </ng-container>
-
   <ng-container *ngIf="(currentUser$ | async) === null">
     <span fxFlex></span>
     <a class="push-down" routerLink="/account/login">{{ 'layout.footer.login' | translate }}</a>

@@ -25,7 +25,7 @@ export class FooterComponent implements OnInit {
         console.log('user loaded');
       }, error => {
         console.log(error);
-      })
+      });
     }
   }
 

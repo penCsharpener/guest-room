@@ -1,31 +1,30 @@
 
 export abstract class ContentBaseModel {
-    title: string = '';
-    contentHtml: string = '';
+    title = '';
+    contentHtml = '';
 }
 
 export class ContactModel extends ContentBaseModel {
-    phoneNumber: string = '';
-    faxNumber: string = '';
-    emailAddress: string = '';
-    fullName: string = '';
-    streetAndHouseNumber: string = '';
-    zipCode: string = '';
-    city: string = '';
+    phoneNumber = '';
+    faxNumber = '';
+    emailAddress = '';
+    fullName = '';
+    streetAndHouseNumber = '';
+    zipCode = '';
+    city = '';
 }
 
 export class HomeModel extends ContentBaseModel {
-    pageTitle: string = '';
-    welcomeParagraph: string = '';
-    mapsLink: string = '';
-    roomOneLink: string = '';
-    roomTwoLink: string = '';
+    pageTitle = '';
+    welcomeParagraph = '';
+    mapsLink = '';
+    roomOneLink = '';
+    roomTwoLink = '';
 }
 
 export class LegalModel extends ContentBaseModel {
     contact = {} as ContactModel;
     legalParagraphs = [] as LegalParagraphModel[];
-    legalRequirements = {} as LegalRequirements;
 }
 
 export class LegalParagraphModel {
@@ -33,21 +32,16 @@ export class LegalParagraphModel {
     text = '';
 }
 
-export class LegalRequirements {
-    heading = '';
-    lines = [] as string[];
-}
-
 export class LiabilityModel extends ContentBaseModel {
-    content: string = '';
-    links: string = '';
-    copyright: string = '';
-    dataProtection: string = '';
+    content = '';
+    links = '';
+    copyright = '';
+    dataProtection = '';
 }
 
 export class RoomModel extends ContentBaseModel {
-    furnishing: string = '';
-    pricing: string = '';
-    miscellaneous: string = '';
+    furnishing = '';
+    pricing = '';
+    miscellaneous = '';
 }
 

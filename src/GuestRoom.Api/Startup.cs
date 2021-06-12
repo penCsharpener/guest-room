@@ -32,7 +32,7 @@ namespace GuestRoom.Api
             services.AddGuestRoomServices(appsettings);
             services.AddMediatR(GetType().Assembly);
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "GuestRoom.Api", Version = "v1" }); });
-            services.AddSpaStaticFiles(configuration => configuration.RootPath = "../client/dist/client");
+            services.AddSpaStaticFiles(configuration => configuration.RootPath = "./wwwroot");
 
             services.AddCors(opt =>
             {
