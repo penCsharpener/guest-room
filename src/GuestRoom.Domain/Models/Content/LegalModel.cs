@@ -2,7 +2,6 @@
 {
     public class LegalModel : ContentBaseModel
     {
-        public ContactModel Contact { get; set; }
         public LegalParagraphModel[] LegalParagraphs { get; set; }
     }
 }

@@ -54,7 +54,14 @@
         "pageTitle": "Seitentitel",
         "welcomeParagraph": "Willkommen Absatz",
         "mapsLink": "Karten Link",
-        "exclusionOfLiability": "Haftungsausschluss"
+        "exclusionOfLiability": "Haftungsausschluss",
+        "heading": "Überschrift",
+        "text": "Text",
+        "lines": "Zeile",
+        "legal": {
+            "addParagraph": "Paragraph hinzufügen",
+            "addLine": "Zeile hinzufügen"
+        }
     },
     "common": {
         "save": "Speichern"

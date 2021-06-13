@@ -23,7 +23,6 @@ export class HomeModel extends ContentBaseModel {
 }
 
 export class LegalModel extends ContentBaseModel {
-    contact = {} as ContactModel;
     legalParagraphs = [] as LegalParagraphModel[];
 }
 

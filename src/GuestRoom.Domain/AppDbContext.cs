@@ -17,5 +17,6 @@ namespace GuestRoom.Domain
         }
 
         public DbSet<Image> Images { get; set; }
+        public DbSet<TextModel> TextModels { get; set; }
     }
 }

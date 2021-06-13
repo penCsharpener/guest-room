@@ -14,19 +14,19 @@ export class SettingsService {
   constructor(private http: HttpClient) { }
 
   getContact() : Observable<ContactModel> {
-    return this.http.get<ContactModel>(this.assetUrl + 'contact.json');
+    return this.http.get<ContactModel>(this.baseUrl + 'contact');
   }
 
   getHome() : Observable<HomeModel> {
-    return this.http.get<HomeModel>(this.assetUrl + 'home.json');
+    return this.http.get<HomeModel>(this.baseUrl + 'home');
   }
 
   getLegal() : Observable<LegalModel> {
-    return this.http.get<LegalModel>(this.assetUrl + 'legal.json');
+    return this.http.get<LegalModel>(this.baseUrl + 'legal');
   }
 
   getRoom(roomId: number) : Observable<RoomModel> {
-    return this.http.get<RoomModel>(`${this.assetUrl}room-${roomId}.json`);
+    return this.http.get<RoomModel>(`${this.baseUrl}/room-${roomId}`);
   }
 
   updateContact(model: ContactModel) : Observable<any> {
@@ -38,6 +38,7 @@ export class SettingsService {
   }
 
   updateLegal(model: LegalModel) : Observable<any> {
+    console.log("🚀 ~ file: settings.service.ts ~ line 41 ~ SettingsService ~ updateLegal ~ model", model)
     return this.http.put(this.baseUrl + 'legal', model);
   }
 

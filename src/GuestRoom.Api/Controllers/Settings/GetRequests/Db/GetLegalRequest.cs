@@ -1,12 +1,12 @@
-﻿using GuestRoom.Api.Extensions;
+﻿using GuestRoom.Domain;
 using GuestRoom.Domain.Models.Content;
 using GuestRoom.Domain.Providers;
 using MediatR;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GuestRoom.Api.Controllers.Settings.GetRequests
+namespace GuestRoom.Api.Controllers.Settings.GetRequests.Db
 {
     public class GetLegalRequest : IRequest<GetLegalResponse> { }
 
@@ -17,20 +17,22 @@ namespace GuestRoom.Api.Controllers.Settings.GetRequests
 
     public class GetLegalRequestHandler : IRequestHandler<GetLegalRequest, GetLegalResponse>
     {
-        private readonly IContentStore _store;
-        private readonly IWebHostEnvironment _env;
+        private readonly AppDbContext _context;
+        private readonly IJsonConverter _jsonConverter;
 
-        public GetLegalRequestHandler(IContentStore store, IWebHostEnvironment env)
+        public GetLegalRequestHandler(AppDbContext context, IJsonConverter jsonConverter)
         {
-            _store = store;
-            _env = env;
+            _context = context;
+            _jsonConverter = jsonConverter;
         }
 
         public async Task<GetLegalResponse> Handle(GetLegalRequest request, CancellationToken cancellationToken)
         {
             var response = new GetLegalResponse();
 
-            response.Legal = await _store.GetContentAsync<LegalModel>(_env.GetAssetPath("site-content"), "legal");
+            var entity = await _context.TextModels.SingleOrDefaultAsync(x => x.TextModelType == TextModelTypes.Legal);
+
+            response.Legal = _jsonConverter.FromJsonAsync<LegalModel>(entity.JsonText);
 
             return response;
         }

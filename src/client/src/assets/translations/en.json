@@ -54,7 +54,14 @@
         "pageTitle": "Page title",
         "welcomeParagraph": "Welcome paragraph",
         "mapsLink": "Maps Link",
-        "exclusionOfLiability": "Exclusion of Liability"
+        "exclusionOfLiability": "Exclusion of Liability",
+        "heading": "Heading",
+        "text": "Text",
+        "lines": "Line",
+        "legal": {
+            "addParagraph": "Add paragraph",
+            "addLine": "Add line"
+        }
     },
     "common": {
         "save": "Save"

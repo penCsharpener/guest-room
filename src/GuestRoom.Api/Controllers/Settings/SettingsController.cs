@@ -1,5 +1,5 @@
-﻿using GuestRoom.Api.Controllers.Settings.GetRequests;
-using GuestRoom.Api.Controllers.Settings.UpdateCommands;
+﻿using GuestRoom.Api.Controllers.Settings.GetRequests.Db;
+using GuestRoom.Api.Controllers.Settings.UpdateCommands.Db;
 using GuestRoom.Domain.Models.Content;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

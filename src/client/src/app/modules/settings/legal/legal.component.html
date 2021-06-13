@@ -24,9 +24,9 @@
                 </mat-form-field>
             </div>
         </div>
-        <button mat-flat-button (click)="addLegalParagraph()">{{ 'settings.legal.addParagraph' | translate }}</button>
+        <button mat-flat-button color="primary" (click)="addLegalParagraph()">{{ 'settings.legal.addParagraph' | translate }}</button>
     </div>
-    <div fxLayout="column">
+    <div class="submit-button" fxLayout="column">
          <button mat-raised-button color="accent" [disabled]="!(editForm.valid && editForm.dirty)" (click)="saveModel()">{{ 'common.save' | translate }}</button>
     </div>
 </form>

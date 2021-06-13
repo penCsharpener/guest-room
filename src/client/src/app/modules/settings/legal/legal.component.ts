@@ -16,19 +16,11 @@ export class LegalComponent implements OnInit {
     return this.editForm.get('legalParagraphs') as FormArray;
   }
 
-  get legalLines(): FormArray {
-    return this.editForm.get('legalRequirements.lines') as FormArray;
-  }
-
   constructor(private fb: FormBuilder, private settingsService: SettingsService) {
     this.editForm = this.fb.group({
       title: ['', Validators.required],
       contentHtml: ['', Validators.required],
       legalParagraphs: this.fb.array([this.buildLegalParagraph()]),
-      legalRequirements: this.fb.group({
-        heading: ['', Validators.required],
-        lines: this.fb.array([this.buildLine()])
-      })
     });
   }
 
@@ -54,17 +46,8 @@ export class LegalComponent implements OnInit {
     this.legalParagraphs.push(this.buildLegalParagraph());
   }
 
-  buildLine(): FormControl {
-    return new FormControl('', Validators.required);
-  }
-
-  addLine(): void {
-    this.legalLines.push(this.buildLine());
-  }
-
   private createModel(): LegalModel {
     const formValue = this.editForm.getRawValue();
     return formValue as LegalModel;
   }
-
 }
