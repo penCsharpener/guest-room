@@ -24,7 +24,6 @@ namespace GuestRoom.Api.Controllers.Settings.UpdateCommands
             _env = env;
         }
 
-
         public async Task<UpdateLegalResponse> Handle(UpdateLegalCommand request, CancellationToken cancellationToken)
         {
             var model = (LegalModel)request;

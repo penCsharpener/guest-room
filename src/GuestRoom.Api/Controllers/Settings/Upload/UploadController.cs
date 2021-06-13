@@ -18,10 +18,16 @@ namespace GuestRoom.Api.Controllers.Settings.Upload
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost, DisableRequestSizeLimit]
         public async Task<ActionResult> Upload([FromForm] ImageUploadApiModel model)
         {
-            var response = await _mediator.Send(new UploadFileRequest { Id = model.Id, ImageName = model.ImageName, FileContent = model.ToRawFile() });
+            var response = await _mediator.Send(new UploadFileRequest
+            {
+                Id = model.Id,
+                File = model.File,
+                Description = model.Description,
+                Location = model.Location
+            });
 
             return Ok();
         }
