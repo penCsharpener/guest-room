@@ -38,7 +38,9 @@ namespace GuestRoom.Api.Controllers.Settings.GetRequests.Db
         {
             var response = new GetRoomResponse();
 
+#pragma warning disable CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
             var modelType = request.Id switch
+#pragma warning restore CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
             {
                 1 => TextModelTypes.Room1,
                 2 => TextModelTypes.Room2

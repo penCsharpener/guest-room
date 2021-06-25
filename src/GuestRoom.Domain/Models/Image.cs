@@ -10,5 +10,6 @@ namespace GuestRoom.Domain.Models
         public DateTime UploadedOn { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
+        public bool IsActive { get; set; }
     }
 }

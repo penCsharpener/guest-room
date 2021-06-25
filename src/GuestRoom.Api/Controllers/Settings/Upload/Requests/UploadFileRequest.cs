@@ -1,4 +1,5 @@
-﻿using GuestRoom.Domain;
+﻿using GuestRoom.Api.Models.Configuration;
+using GuestRoom.Domain;
 using GuestRoom.Domain.Models;
 using GuestRoom.Domain.Providers;
 using MediatR;
@@ -25,15 +26,15 @@ namespace GuestRoom.Api.Controllers.Settings.Upload.Requests
     public class UploadFileRequestHandler : IRequestHandler<UploadFileRequest, UploadFileResponse>
     {
         private readonly AppDbContext _context;
+        private readonly AppSettings _appSettings;
         private readonly IFileProvider _fileProvider;
-        private readonly IWebHostEnvironment _env;
         private readonly ILogger<UploadFileRequestHandler> _logger;
 
-        public UploadFileRequestHandler(AppDbContext context, IFileProvider fileProvider, IWebHostEnvironment env, ILogger<UploadFileRequestHandler> logger)
+        public UploadFileRequestHandler(AppDbContext context, AppSettings appSettings, IFileProvider fileProvider, IWebHostEnvironment env, ILogger<UploadFileRequestHandler> logger)
         {
             _context = context;
+            _appSettings = appSettings;
             _fileProvider = fileProvider;
-            _env = env;
             _logger = logger;
         }
 
@@ -46,10 +47,10 @@ namespace GuestRoom.Api.Controllers.Settings.Upload.Requests
             var imageEntity = new Image
             {
                 UploadedOn = DateTime.Now,
-                Path = $"{_env.WebRootPath}\\assets\\images\\{newImageName}",
-                Location = "",
+                Path = $"{_appSettings.ApplicationPaths.ImageAssetPath.Trim('/')}/{newImageName}",
+                Location = request.Location,
                 Name = newImageName,
-                Description = "",
+                Description = request.Description,
             };
 
             _context.Images.Add(imageEntity);
@@ -64,7 +65,7 @@ namespace GuestRoom.Api.Controllers.Settings.Upload.Requests
         {
             using (var ms = new MemoryStream())
             {
-                file.CopyToAsync(ms);
+                await file.CopyToAsync(ms);
                 return ms.ToArray();
             }
         }

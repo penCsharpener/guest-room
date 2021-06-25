@@ -44,3 +44,10 @@ export class RoomModel extends ContentBaseModel {
     miscellaneous = '';
 }
 
+export class ImageModel {
+    file?: File;
+    path = '';
+    description = '';
+    name = '';
+    location = '';
+}

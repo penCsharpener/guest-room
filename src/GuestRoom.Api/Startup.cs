@@ -32,7 +32,7 @@ namespace GuestRoom.Api
             services.AddGuestRoomServices(appsettings);
             services.AddMediatR(GetType().Assembly);
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "GuestRoom.Api", Version = "v1" }); });
-            services.AddSpaStaticFiles(configuration => configuration.RootPath = "./wwwroot");
+            services.AddSpaStaticFiles(configuration => configuration.RootPath = "../client/dist/guest-room");
 
             services.AddCors(opt =>
             {
@@ -80,7 +80,7 @@ namespace GuestRoom.Api
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseProxyToSpaDevelopmentServer("https://localhost:5001");
+                    spa.UseProxyToSpaDevelopmentServer("https://localhost:4200");
                 }
             });
         }

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { ContactModel, HomeModel, LegalModel, RoomModel } from './settings.models';
+import { ContactModel, HomeModel, ImageModel, LegalModel, RoomModel } from './settings.models';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,10 @@ export class SettingsService {
 
   getRoom(roomId: number) : Observable<RoomModel> {
     return this.http.get<RoomModel>(`${this.baseUrl}/room-${roomId}`);
+  }
+
+  getImages(): Observable<ImageModel[]> {
+    return this.http.get<ImageModel[]>(`${this.baseUrl}/images`);
   }
 
   updateContact(model: ContactModel) : Observable<any> {

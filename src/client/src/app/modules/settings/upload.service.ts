@@ -3,11 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../core/auth.service';
+import { ImageModel } from './settings.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UploadService {
+  baseUrl = `${environment.apiUrl}/`;
+  assetUrl = 'assets/images/'
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -19,5 +22,9 @@ export class UploadService {
       observe: 'events',
       reportProgress: true
     });
+  }
+
+  getImages(): Observable<ImageModel[]> {
+    return this.http.get<ImageModel[]>(`${this.baseUrl}/images`);
   }
 }
