@@ -351,3 +351,4 @@ MigrationBackup/
 
 
 /src/GuestRoom.Api/wwwroot/
+src/client/.angular/
