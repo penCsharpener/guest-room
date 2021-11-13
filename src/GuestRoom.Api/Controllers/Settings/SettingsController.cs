@@ -52,6 +52,14 @@ namespace GuestRoom.Api.Controllers.Settings
             return Ok(response.Room);
         }
 
+        [HttpGet("images")]
+        public async Task<ActionResult> GetImages()
+        {
+            var response = await _mediator.Send(new GetImagesRequest());
+
+            return Ok(response.Images);
+        }
+
         [HttpPut("contact")]
         public async Task<ActionResult> UpdateContact([FromBody] UpdateContactCommand model)
         {

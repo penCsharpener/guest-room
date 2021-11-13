@@ -39,7 +39,7 @@ namespace GuestRoom.Api.Controllers.Settings.GetRequests.Db
                     Description = x.Description,
                     Location = x.Location,
                     Name = x.Name
-                }).ToListAsync();
+                }).ToListAsync(cancellationToken);
 
             response.Images = entity;
 

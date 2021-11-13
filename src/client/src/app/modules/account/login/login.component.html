@@ -6,7 +6,7 @@
           <div fxLayout="column" fxLayoutAlign="start center" class="input-row">
             <mat-form-field appearance="outline">
               <mat-label>{{ 'account.email' | translate }}</mat-label>
-              <input matInput placeholder="E-Mail" formControlName="email" autofocus>
+              <input matInput placeholder="E-Mail" formControlName="email" type="email" autofocus>
               <mat-error *ngIf="loginForm.get('email')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
               <mat-error *ngIf="loginForm.get('email')?.hasError('email')">{{ 'errors.emailInvalid' | translate }}</mat-error>
             </mat-form-field>

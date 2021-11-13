@@ -36,6 +36,11 @@ namespace GuestRoom.Api.Controllers
 
             var user = await _authService.FindByEmailAsync(email);
 
+            if (user == null)
+            {
+                return null;
+            }
+
             return new UserDto()
             {
                 Email = user.Email,

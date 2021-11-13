@@ -29,7 +29,7 @@ namespace GuestRoom.Api.Controllers.Settings.Upload
                 Location = model.Location
             });
 
-            return Ok();
+            return Ok(response);
         }
     }
 }

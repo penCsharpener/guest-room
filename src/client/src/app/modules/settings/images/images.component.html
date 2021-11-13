@@ -1,20 +1,31 @@
-<div fxLayout="column">
-    <mat-card>
-    <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
-    <div class="file-upload">
-        {{ fileName || "No file uploaded yet." }}
-         <button mat-mini-fab color="primary" (click)="fileUpload.click()"> 
-             <mat-icon>attach_file</mat-icon>
-         </button>
-     </div>
+<div fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="column">
+        <mat-card>
+        <input type="file" class="file-input" (change)="onFileSelected(fileUpload)" accept="image/*" #fileUpload>
+        <div class="file-upload">
+            {{ fileName || "No file uploaded yet." }}
+            <button mat-mini-fab color="primary" (click)="fileUpload.click()"> 
+                <mat-icon>attach_file</mat-icon>
+            </button>
+        </div>
 
-    <div class="progress">
-        <mat-progress-bar class="progress-bar" mode="determinate"
-                          [value]="uploadProgress" *ngIf="uploadProgress">
-        </mat-progress-bar>
-        <mat-icon class="cancel-upload" (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever</mat-icon>
+        <div class="progress">
+            <mat-progress-bar class="progress-bar" mode="determinate"
+                            [value]="uploadProgress" *ngIf="uploadProgress">
+            </mat-progress-bar>
+            <mat-icon class="cancel-upload" (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever</mat-icon>
+        </div>
+        
+        </mat-card>
     </div>
-    
-    </mat-card>
+    <div class="image-cards" fxLayout="column" fxLayoutGap="16px" *ngIf="images$ | async as images">
+        <mat-card class="image-card" *ngFor="let img of images">
+            <mat-card-header>
+                <mat-card-title>
+                    {{ img.name }}
+                </mat-card-title>
+            </mat-card-header>
+            <img src="assets/images/{{ img.name }}" alt="{{ img.name }}">
+        </mat-card>
+    </div>
 </div>
-

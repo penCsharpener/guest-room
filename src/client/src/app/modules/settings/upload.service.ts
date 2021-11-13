@@ -12,12 +12,12 @@ export class UploadService {
   baseUrl = `${environment.apiUrl}/`;
   assetUrl = 'assets/images/'
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient) { }
 
   uploadImage(data: FormData): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Disposition', 'undefined');
+    const headers = new HttpHeaders().append('Content-Disposition', 'undefined').append('Accept', 'application/json');
 
-    return this.http.post(`${environment.apiUrl}/upload`, data, {
+    return this.http.post(`${this.baseUrl}settings/upload`, data, {
       headers: headers,
       observe: 'events',
       reportProgress: true
@@ -25,6 +25,6 @@ export class UploadService {
   }
 
   getImages(): Observable<ImageModel[]> {
-    return this.http.get<ImageModel[]>(`${this.baseUrl}/images`);
+    return this.http.get<ImageModel[]>(`${this.baseUrl}settings/images`);
   }
 }

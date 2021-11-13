@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
 
 #nullable enable
 
@@ -11,9 +11,9 @@ namespace GuestRoom.Domain.Validation
     [AttributeUsage(AttributeTargets.Property)]
     public class ValidateFileTypeAttribute : ValidationAttribute
     {
-        private readonly string _validTypes;
+        private readonly string[] _validTypes;
 
-        public ValidateFileTypeAttribute(string validTypes)
+        public ValidateFileTypeAttribute(params string[] validTypes)
         {
             _validTypes = validTypes;
         }
@@ -25,23 +25,21 @@ namespace GuestRoom.Domain.Validation
                 return new("Cannot be null.");
             }
 
-            var fileName = ((IFormFile) value).FileName;
+            var fileName = ((IFormFile)value).FileName;
 
             if (string.IsNullOrWhiteSpace(fileName))
             {
                 return new("File name cannot be null, empty or white space.");
             }
 
-            if (!fileName.Contains("."))
+            if (!fileName.Contains('.'))
             {
                 return new("Filename must contain a file extension.");
             }
 
-            var allowedFileTypes = _validTypes.Split(',', StringSplitOptions.RemoveEmptyEntries);
-
             var fileExtension = Path.GetExtension(fileName).Replace(".", "");
 
-            if (allowedFileTypes.Contains(fileExtension))
+            if (_validTypes.Contains(fileExtension))
             {
                 return ValidationResult.Success;
             }

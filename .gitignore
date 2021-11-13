@@ -352,3 +352,5 @@ MigrationBackup/
 
 /src/GuestRoom.Api/wwwroot/
 src/client/.angular/
+
+src/client/src/assets/images/

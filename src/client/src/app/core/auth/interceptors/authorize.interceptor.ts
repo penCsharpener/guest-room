@@ -18,8 +18,6 @@ export class AuthorizeInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = request.clone({
       setHeaders: {
-        'Content-Type' : 'application/json; charset=utf-8',
-        'Accept'       : 'application/json',
         'Authorization': `Bearer ${this.authService.getToken()}`,
       },
     });

@@ -51,10 +51,11 @@ namespace GuestRoom.Api.Controllers.Settings.Upload.Requests
                 Location = request.Location,
                 Name = newImageName,
                 Description = request.Description,
+                IsActive = true
             };
 
             _context.Images.Add(imageEntity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
 
             await _fileProvider.WriteAllBytesAsync(await GetRawContent(request.File), imageEntity.Path);
 

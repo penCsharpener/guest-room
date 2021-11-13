@@ -1,3 +1,18 @@
 .file-input {
     display: none;
   }
+
+  .image-cards {
+    max-width: 75vw;
+
+    .image-card {
+      max-width: 450px;
+  
+      img {
+        max-width: 450px;
+        height: auto;
+      }
+    }
+  }
+
+  
