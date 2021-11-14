@@ -26,6 +26,10 @@ export class LegalComponent implements OnInit {
 
   ngOnInit(): void {
     this.settingsService.getLegal().subscribe(result => {
+      for (let index = 0; index < result.legalParagraphs.length - 1; index++) {
+        this.addLegalParagraph();
+      }
+
       this.editForm.patchValue(result);
     });
   }
