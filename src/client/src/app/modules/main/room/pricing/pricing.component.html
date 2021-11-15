@@ -1,0 +1,37 @@
+<h3>{{ 'pricing.prices' | translate }}</h3>
+
+<div class="table" fxLayout="column" fxLayoutGap="16px" *ngIf="pricing">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+            {{ 'pricing.firstNightOnePerson' | translate }}
+        </div>
+        <div>
+            {{ pricing.firstNightOnePerson | currency:'EUR' }}
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+            {{ 'pricing.everyFollowingNight' | translate }}
+        </div>
+        <div>
+            {{ pricing.everyFollowingNight | currency:'EUR' }}
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+            {{ 'pricing.twoPersons' | translate }}
+        </div>
+        <div>
+            {{ pricing.twoPersons | currency:'EUR' }}
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+            {{ 'pricing.breakfastPerPerson' | translate }}
+        </div>
+        <div>
+            {{ pricing.breakfastPerPerson | currency:'EUR' }}
+        </div>
+    </div>
+</div>
+

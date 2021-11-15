@@ -1,6 +1,7 @@
 <div class="home-center-container" fxLayout="column" fxLayoutAlign="center center">
     <h2>{{ homeModel?.pageTitle }}</h2>
     <div [innerHTML]="homeModel?.welcomeParagraph"></div>
-    <img class="image img-house-1" [class.mat-elevation-z8]="true" src="assets/images/house-front-entrance.jpg" alt="house entrance">
-    <img class="image img-house-2" [class.mat-elevation-z8]="true" src="assets/images/house-front-street.jpg" alt="house street">
+    <app-image imageName="house-front-entrance.jpg" className="img-house-1" altName="house entrance"></app-image>
+    <app-image imageName="house-front-street.jpg" className="img-house-2" altName="house street"></app-image>
+    <app-map-link></app-map-link>
 </div>

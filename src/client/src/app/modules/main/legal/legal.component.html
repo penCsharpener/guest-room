@@ -1,1 +1,33 @@
-<p>legal works!</p>
+<ng-container *ngIf="legal$ | async as legal">
+    <ng-container *ngIf="contact$ | async as contact">
+    <h2>{{ legal.title }}</h2>
+    <p>{{ contact.fullName }}</p>
+    <p>{{ contact.streetAndHouseNumber }}</p>
+    <p>{{ contact.zipCode }} {{ contact.city }}</p>
+
+    <div fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <p>{{ 'settings.phoneNumber' | translate }}:</p>
+            <p>{{ contact.phoneNumber }}</p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <p>{{ 'settings.faxNumber' | translate }}:</p>
+            <p>{{ contact.faxNumber }}</p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <p>{{ 'settings.emailAddress' | translate }}:</p>
+            <p>{{ contact.emailAddress }}</p>
+        </div>
+    </div>
+    
+    <h3>Haftungsausschluss:</h3>
+
+    <div class="legal-paragraphs" fxLayout="column" *ngFor="let p of legal.legalParagraphs">
+        <h4>{{ p.heading }}</h4>
+        <p>{{ p.text }}</p>
+    </div>
+    
+    <app-map-link></app-map-link>
+
+    </ng-container>
+</ng-container>

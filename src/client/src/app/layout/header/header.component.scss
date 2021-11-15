@@ -1,4 +1,9 @@
-.mat-toolbar {
+mat-toolbar {
+
+  position: sticky;
+  top: 0;
+  // background-image: url("../../../assets/images/banner.jpg");
+
   ul {
     li {
       list-style-type: none;

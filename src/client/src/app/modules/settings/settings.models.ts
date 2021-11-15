@@ -40,8 +40,19 @@ export class LiabilityModel extends ContentBaseModel {
 
 export class RoomModel extends ContentBaseModel {
     furnishing = '';
-    pricing = '';
-    miscellaneous = '';
+    pricing = <PricingModel>{};
+    miscellaneous = <MiscellaneousModel>{};
+}
+
+export class MiscellaneousModel {
+    content = []
+}
+
+export class PricingModel {
+    firstNightOnePerson = 0;
+    everyFollowingNight = 0;
+    twoPersons = 0;
+    breakfastPerPerson = 0;
 }
 
 export class ImageModel {

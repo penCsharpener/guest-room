@@ -21,6 +21,7 @@ namespace GuestRoom.Api.Controllers.Settings
         }
 
         [HttpGet("contact")]
+        [AllowAnonymous]
         public async Task<ActionResult<ContactModel>> GetContact()
         {
             var response = await _mediator.Send(new GetContactRequest());
@@ -29,6 +30,7 @@ namespace GuestRoom.Api.Controllers.Settings
         }
 
         [HttpGet("home")]
+        [AllowAnonymous]
         public async Task<ActionResult> GetHome()
         {
             var response = await _mediator.Send(new GetHomeRequest());
@@ -37,6 +39,7 @@ namespace GuestRoom.Api.Controllers.Settings
         }
 
         [HttpGet("legal")]
+        [AllowAnonymous]
         public async Task<ActionResult> GetLegal()
         {
             var response = await _mediator.Send(new GetLegalRequest());
@@ -45,6 +48,7 @@ namespace GuestRoom.Api.Controllers.Settings
         }
 
         [HttpGet("room/{id:int}")]
+        [AllowAnonymous]
         public async Task<ActionResult> GetRoom(int id)
         {
             var response = await _mediator.Send(new GetRoomRequest(id));
@@ -53,6 +57,7 @@ namespace GuestRoom.Api.Controllers.Settings
         }
 
         [HttpGet("images")]
+        [AllowAnonymous]
         public async Task<ActionResult> GetImages()
         {
             var response = await _mediator.Send(new GetImagesRequest());

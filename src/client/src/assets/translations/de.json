@@ -41,6 +41,28 @@
         "registrationSubmitted": "Wenn Ihre Email im System gefunden wurde, werden Sie gleich eine Email mit dem Link erhalten, um Ihr Passwort zurückzusetzen.",
         "submit": "Registrieren"
     },
+    "contact": {
+        "contact": "Kontakt",
+        "contactForm": "Kontaktformular",
+        "title": "Anrede",
+        "name": "Name",
+        "emailAddress": "E-Mail",
+        "address": "Adresse",
+        "subject": "Betreff",
+        "message": "Nachricht",
+        "sendMessage": "Sende Nachricht",
+        "send": "Absenden",
+        "pleaseChoose": "bitte wählen",
+        "mr": "Herr",
+        "mrs": "Frau"
+    },
+    "pricing": {
+        "prices": "Preise",
+        "firstNightOnePerson": "Eine Person erste Übernachtung",
+        "everyFollowingNight": "Eine Person, jede weitere Übernachtung",
+        "twoPersons": "Zwei Personen",
+        "breakfastPerPerson": "Frühstück pro Person"
+    },
     "settings": {
         "title": "Titel",
         "contentHtml": "HTML-Inhalt",
@@ -58,6 +80,9 @@
         "heading": "Überschrift",
         "text": "Text",
         "lines": "Zeile",
+        "furnishing": "Ausstattung",
+        "pricing": "Preise",
+        "miscellaneous": "Sonstiges",
         "legal": {
             "addParagraph": "Paragraph hinzufügen",
             "addLine": "Zeile hinzufügen"

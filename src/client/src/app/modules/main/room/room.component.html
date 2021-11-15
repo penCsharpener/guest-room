@@ -1,1 +1,17 @@
-<p>{{ this.roomModel.title }}</p>
+<div class="home-center-container" fxLayout="column" fxLayoutAlign="center center">
+    <h2>{{ roomModel.title }}</h2>
+    <app-image imageName="room-{{roomId}}-bed.jpg" className="img-room-1" altName="bed"></app-image>
+    <div class="furnishing">
+        <app-list [heading]="'settings.furnishing' | translate" [elements]="getFurnishing()"></app-list>
+    </div>
+    <app-image imageName="room-{{roomId}}-bath.jpg" className="img-room-2" altName="bath"></app-image>
+    <div class="pricing">
+        <app-pricing [pricing]="roomModel.pricing"></app-pricing>
+    </div>
+    <app-image imageName="room-{{roomId}}-door.jpg" className="img-room-3" altName="door"></app-image>
+    <div class="misc">
+        <app-list [heading]="'settings.miscellaneous' | translate" [elements]="getMisc()"></app-list>
+    </div>
+    <app-image imageName="room-{{roomId}}-tv.jpg" className="img-room-4" altName="tv"></app-image>
+</div>
+<app-map-link></app-map-link>

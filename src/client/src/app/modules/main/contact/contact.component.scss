@@ -1,0 +1,32 @@
+:host {
+    min-width: 520px;
+    margin: 0 20%;
+}
+
+form {
+    margin-top: 48px;
+
+    mat-card {
+        mat-card-header {
+            button {
+                margin: 16px;
+                pointer-events: none;
+            }
+        
+            div {
+                margin-left: 32px;
+            }
+    
+            padding: 16px;
+            margin: -16px;
+            margin-bottom: 16px;
+            background-color: rgb(240, 240, 240);
+        }
+    
+        mat-card-actions {
+            div {
+                padding: 0 16px 16px 16px;
+            }
+        }
+    }
+}

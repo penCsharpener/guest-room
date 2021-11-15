@@ -4,6 +4,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ImageComponent } from './image/image.component';
+import { ListComponent } from './list/list.component';
 
 const MODULES = [
   CommonModule,
@@ -11,7 +13,7 @@ const MODULES = [
 ]
 
 @NgModule({
-  declarations: [],
+  declarations: [ImageComponent, ListComponent],
   imports: [
     ...MODULES,
     TranslateModule.forRoot({
@@ -24,7 +26,9 @@ const MODULES = [
   ],
   exports: [
     ...MODULES,
-    TranslateModule
+    TranslateModule,
+    ImageComponent,
+    ListComponent
   ]
 })
 export class SharedModule { }

@@ -41,6 +41,21 @@
         "registrationSubmitted": "If your email is registered in the system you will receive an email with a password reset link.",
         "submit": "Submit"
     },
+    "contact": {
+        "contact": "Contact",
+        "contactForm": "Contact form",
+        "title": "Title",
+        "name": "Name",
+        "emailAddress": "Email",
+        "address": "Addresse",
+        "subject": "Subject",
+        "message": "Message",
+        "sendMessage": "Send message",
+        "send": "Send",
+        "pleaseChoose": "Please choose",
+        "mr": "Mr",
+        "mrs": "Mrs"
+    },
     "settings": {
         "title": "Title",
         "contentHtml": "Content HTML",
@@ -58,6 +73,9 @@
         "heading": "Heading",
         "text": "Text",
         "lines": "Line",
+        "furnishing": "Furnishing",
+        "pricing": "Pricing",
+        "miscellaneous": "Miscellaneous",
         "legal": {
             "addParagraph": "Add paragraph",
             "addLine": "Add line"

@@ -9,8 +9,8 @@ import { SettingsService } from '../settings.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  model: HomeModel = <HomeModel>{};
-  editForm: FormGroup = <FormGroup>{};
+  model = <HomeModel>{};
+  editForm = <FormGroup>{};
 
   constructor(private fb: FormBuilder, private settingsService: SettingsService) { 
     this.editForm = this.fb.group({

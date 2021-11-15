@@ -26,11 +26,11 @@ export class SettingsService {
   }
 
   getRoom(roomId: number) : Observable<RoomModel> {
-    return this.http.get<RoomModel>(`${this.baseUrl}/room-${roomId}`);
+    return this.http.get<RoomModel>(`${this.baseUrl}room/${roomId}`);
   }
 
   getImages(): Observable<ImageModel[]> {
-    return this.http.get<ImageModel[]>(`${this.baseUrl}/images`);
+    return this.http.get<ImageModel[]>(`${this.baseUrl}images`);
   }
 
   updateContact(model: ContactModel) : Observable<any> {

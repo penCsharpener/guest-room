@@ -1,1 +1,51 @@
-<p>{{ title }}</p>
+<h2>{{ title }}</h2>
+
+<form novalidate [formGroup]="editForm">
+    <div fxLayout="column">
+        <mat-form-field>
+            <mat-label>{{ 'settings.title' | translate }}</mat-label>
+            <input matInput formControlName="title">
+            <mat-error *ngIf="editForm.get('title')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>{{ 'settings.contentHtml' | translate }}</mat-label>
+            <input matInput formControlName="contentHtml">
+            <mat-error *ngIf="editForm.get('contentHtml')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>{{ 'settings.furnishing' | translate }}</mat-label>
+            <textarea matInput formControlName="furnishing" rows="5"></textarea>
+            <mat-error *ngIf="editForm.get('furnishing')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+        </mat-form-field>
+        <div [formGroup]="pricingGroup">
+            <mat-form-field>
+                <mat-label>{{ 'settings.pricing.firstNightOnePerson' | translate }}</mat-label>
+                <input matInput formControlName="firstNightOnePerson" type="number">
+                <mat-error *ngIf="editForm.get('pricing')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ 'settings.pricing.everyFollowingNight' | translate }}</mat-label>
+                <input matInput formControlName="everyFollowingNight" type="number">
+                <mat-error *ngIf="editForm.get('pricing')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ 'settings.pricing.twoPersons' | translate }}</mat-label>
+                <input matInput formControlName="twoPersons" type="number">
+                <mat-error *ngIf="editForm.get('pricing')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ 'settings.pricing.breakfastPerPerson' | translate }}</mat-label>
+                <input matInput formControlName="breakfastPerPerson" type="number">
+                <mat-error *ngIf="editForm.get('pricing')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+            </mat-form-field>
+        </div>
+        <mat-form-field>
+            <mat-label>{{ 'settings.miscellaneous' | translate }}</mat-label>
+            <textarea matInput formControlName="miscellaneous" rows="5"></textarea>
+            <mat-error *ngIf="editForm.get('miscellaneous')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+        </mat-form-field>
+    </div>
+    <div fxLayout="column">
+        <button mat-raised-button color="accent" [disabled]="!(editForm.valid && editForm.dirty)" (click)="saveModel()">{{ 'common.save' | translate }}</button>
+    </div>
+</form>

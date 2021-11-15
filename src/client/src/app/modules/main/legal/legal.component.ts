@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { of } from 'rxjs';
+import { ContactModel, LegalModel } from '../../settings/settings.models';
+import { SettingsService } from '../../settings/settings.service';
 
 @Component({
   selector: 'app-legal',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./legal.component.scss']
 })
 export class LegalComponent implements OnInit {
+  legal$ = of<LegalModel>();
+  contact$ = of<ContactModel>();
 
-  constructor() { }
+  constructor(private settingsService: SettingsService) { }
 
   ngOnInit(): void {
+    this.legal$ = this.settingsService.getLegal();
+    this.contact$ = this.settingsService.getContact();
   }
 
 }

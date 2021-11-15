@@ -10,7 +10,7 @@ import { SettingsService } from '../settings.service';
 })
 export class ContactComponent implements OnInit {
   model: ContactModel = <ContactModel>{};
-  editForm: FormGroup = <FormGroup>{};
+  editForm = <FormGroup>{};
 
   constructor(private fb: FormBuilder, private settingsService: SettingsService) { 
     this.editForm = this.fb.group({

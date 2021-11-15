@@ -1,1 +1,66 @@
-<p>contact works!</p>
+<ng-container *ngIf="contact$ | async as contact">
+    <div class="contact-info">
+        <h2>{{ 'contact.contact' | translate }}</h2>
+    
+        <p>{{ contact.title }}</p>
+        <p>{{ contact.contentHtml.replace('{phoneNumbers}', contact.phoneNumber) }}</p>
+    </div>
+
+    <form novalidate [formGroup]="contactForm">
+        <mat-card [class.mat-elevation-z12]="true">
+            <mat-card-header fxLayout="row">
+                <button mat-fab color="primary" >
+                    <mat-icon>email</mat-icon>
+                </button>
+                <div fxLayoutAlign="center center">
+                    <h3>{{ 'contact.sendMessage' | translate }}</h3>
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+                <div fxLayout="column">
+                    <mat-form-field>
+                        <mat-label>{{ 'contact.title' | translate }}</mat-label>
+                        <mat-select formControlName="title">
+                            <mat-option *ngFor="let title of titles; let i = index" value="{{ title.value | translate}}">
+                            {{ title.key | translate }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="contactForm.get('title')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{ 'contact.name' | translate }}</mat-label>
+                        <input matInput formControlName="name">
+                        <mat-error *ngIf="contactForm.get('name')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{ 'contact.emailAddress' | translate }}</mat-label>
+                        <input matInput formControlName="emailAddress">
+                        <mat-error *ngIf="contactForm.get('emailAddress')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{ 'contact.address' | translate }}</mat-label>
+                        <input matInput formControlName="address">
+                        <mat-error *ngIf="contactForm.get('address')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{ 'contact.subject' | translate }}</mat-label>
+                        <input matInput formControlName="subject">
+                        <mat-error *ngIf="contactForm.get('subject')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{ 'contact.message' | translate }}</mat-label>
+                        <textarea matInput formControlName="message" rows="7"></textarea>
+                        <mat-error *ngIf="contactForm.get('message')?.hasError('required')">{{ 'errors.requiredValue' | translate }}</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <div fxLayout="column" fxLayoutAlign="center start">
+                    <button mat-raised-button color="accent" [disabled]="!(contactForm.valid && contactForm.dirty)" (click)="saveModel()">{{ 'contact.send' | translate }}</button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+    <app-map-link></app-map-link>
+
+</ng-container>

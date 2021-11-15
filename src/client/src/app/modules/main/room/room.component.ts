@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { tap } from 'rxjs/operators';
 import { RoomModel } from '../../settings/settings.models';
 import { SettingsService } from '../../settings/settings.service';
 
@@ -15,9 +16,16 @@ export class RoomComponent implements OnInit {
   constructor(private route: ActivatedRoute, private settingsService: SettingsService) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.roomId = +params.id;
-      this.settingsService.getRoom(this.roomId).subscribe(result => this.roomModel = result);
-    });
+    this.route.params.pipe(
+        tap(params => this.roomId = +params.id)
+      ).subscribe(_ => this.settingsService.getRoom(this.roomId).subscribe(result => this.roomModel = result));
+  }
+
+  getFurnishing(): string[] {
+    return this.roomModel.furnishing?.split(/\r?\n/) ?? [];
+  }
+
+  getMisc(): string[] {
+    return this.roomModel?.miscellaneous?.content ?? [];
   }
 }
