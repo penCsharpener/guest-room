@@ -10,6 +10,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
 
 const MODULES = [
   MatButtonModule,
@@ -22,7 +24,9 @@ const MODULES = [
   MatSelectModule,
   MatCardModule,
   MatToolbarModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatTooltipModule,
+  MatBadgeModule
 ];
 
 @NgModule({

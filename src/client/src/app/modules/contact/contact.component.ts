@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { ContactModel } from '../../settings/settings.models';
-import { SettingsService } from '../../settings/settings.service';
-import { SendMessageModel } from './contact.models';
-import { ContactService } from './contact.service';
+import { VisitorService } from '../../shared/visitor.service';
+import { ContactModel } from '../settings/settings.models';
+import { SettingsService } from '../settings/settings.service';
+import { SendMessageModel } from '../../shared/contact.models';
 
 @Component({
   selector: 'app-contact',
@@ -17,7 +17,7 @@ export class ContactComponent implements OnInit {
   contactForm = <FormGroup>{};
   titles = [] as KeyValuePair[];
 
-  constructor(private fb: FormBuilder, private settingsService: SettingsService, private contactService: ContactService) {
+  constructor(private fb: FormBuilder, private settingsService: SettingsService, private visitorService: VisitorService) {
     this.contactForm = this.fb.group({
       title: ['', Validators.required],
       name: ['', Validators.required],
@@ -44,7 +44,7 @@ export class ContactComponent implements OnInit {
       messageBody: this.contactForm.value.message
     } as SendMessageModel;
 
-    this.contactService.sendMessage(model).pipe(finalize(() => { this.contactForm.reset(); this.contactForm.updateValueAndValidity()})).subscribe();
+    this.visitorService.sendMessage(model).pipe(finalize(() => { this.contactForm.reset(); this.contactForm.updateValueAndValidity()})).subscribe();
   }
 }
 

@@ -1,0 +1,15 @@
+button {
+    cursor: default;
+    position: fixed;
+    right: 5rem;
+    top: 15rem;
+
+    span {
+        right: -25px;
+        top: -2px;
+        position: absolute;
+        padding: 0 10px 0 10px;
+        border-radius: 20px;
+        background-color: #d63e10;
+    }
+}

@@ -1,0 +1,7 @@
+<ng-container *ngIf="home$ | async as home">
+    <a mat-fab color="accent" href="{{ home.mapsLink }}" target="_blank" aria-label="google maps">
+        <mat-icon>location_on</mat-icon>
+    </a>
+</ng-container>
+
+<app-counter></app-counter>

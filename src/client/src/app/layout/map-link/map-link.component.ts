@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs/operators';
-import { SettingsService } from '../../settings/settings.service';
+import { of } from 'rxjs';
+import { HomeModel } from '../../modules/settings/settings.models';
+import { SettingsService } from '../../modules/settings/settings.service';
 
 @Component({
   selector: 'app-map-link',
@@ -8,15 +9,11 @@ import { SettingsService } from '../../settings/settings.service';
   styleUrls: ['./map-link.component.scss']
 })
 export class MapLinkComponent implements OnInit {
-
-  mapLink = '';
+  home$ = of<HomeModel>();
 
   constructor(private settingsService: SettingsService) { }
 
   ngOnInit(): void {
-    this.settingsService.getHome().pipe(
-      tap(result => this.mapLink = result.mapsLink)
-    ).subscribe();
+    this.home$ = this.settingsService.getHome();
   }
-
 }

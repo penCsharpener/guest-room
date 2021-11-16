@@ -1,8 +1,10 @@
 <mat-toolbar>
   <a routerLink="/">{{ 'layout.header.siteTitle' | translate }}</a>
   <span fxFlex></span>
+  <app-map-link></app-map-link>
   <ul fxLayout="row" fxLayoutGap="15px">
     <li><a routerLink="/main/room/1">{{ 'layout.links.roomOneLink' | translate }}</a></li>
     <li><a routerLink="/main/room/2">{{ 'layout.links.roomTwoLink' | translate }}</a></li>
   </ul>
 </mat-toolbar>
+

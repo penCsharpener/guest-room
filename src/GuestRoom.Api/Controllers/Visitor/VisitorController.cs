@@ -1,17 +1,19 @@
 ﻿using GuestRoom.Api.Controllers.Contact;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using System;
 using System.Threading.Tasks;
 
-namespace GuestRoom.Api.Controllers;
+namespace GuestRoom.Api.Controllers.Visitor;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ContactController : ControllerBase
+public class VisitorController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public ContactController(IMediator mediator)
+    public VisitorController(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -30,5 +32,14 @@ public class ContactController : ControllerBase
         });
 
         return Ok(response);
+    }
+
+    [HttpPost]
+    [Route("counter/{sessionId:guid}")]
+    public async Task<ActionResult> CountAsync(Guid sessionId)
+    {
+        var count = await _mediator.Send(new CountVisitorRequest() { SessionId = sessionId });
+
+        return Ok(count);
     }
 }

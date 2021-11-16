@@ -56,6 +56,9 @@
         "mr": "Herr",
         "mrs": "Frau"
     },
+    "counter": {
+        "tooltip": "Besucher unserer Webseite"
+    },
     "pricing": {
         "prices": "Preise",
         "firstNightOnePerson": "Eine Person erste Übernachtung",

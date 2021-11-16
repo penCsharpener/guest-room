@@ -56,6 +56,16 @@
         "mr": "Mr",
         "mrs": "Mrs"
     },
+    "counter": {
+        "tooltip": "Visitors of our website"
+    },
+    "pricing": {
+        "prices": "Prices",
+        "firstNightOnePerson": "One person first night",
+        "everyFollowingNight": "One person 2nd and subsequent nights",
+        "twoPersons": "Two people",
+        "breakfastPerPerson": "Breakfast per person"
+    },
     "settings": {
         "title": "Title",
         "contentHtml": "Content HTML",

@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ImageComponent } from './image/image.component';
 import { ListComponent } from './list/list.component';
+import { VisitorService } from './visitor.service';
 
 const MODULES = [
   CommonModule,

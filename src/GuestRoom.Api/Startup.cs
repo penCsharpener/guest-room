@@ -31,6 +31,7 @@ namespace GuestRoom.Api
             services.AddEfCore(appsettings, Configuration.GetConnectionString("SqliteConnection"));
             services.AddGuestRoomServices(appsettings);
             services.AddMediatR(GetType().Assembly);
+            services.AddMemoryCache();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "GuestRoom.Api", Version = "v1" }); });
             services.AddSpaStaticFiles(configuration => configuration.RootPath = "../client/dist/guest-room");
 

@@ -1,0 +1,6 @@
+<ng-container *ngIf="visitor$ | async as count">
+    <button mat-fab color="primary" matTooltip="{{ 'counter.tooltip' | translate }}">
+        <mat-icon>visibility</mat-icon>
+        <span>{{ count }}</span>
+    </button>
+</ng-container>
